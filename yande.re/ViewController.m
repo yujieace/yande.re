@@ -44,6 +44,7 @@
         image.contentMode=UIViewContentModeScaleAspectFit;
         [image sd_setImageWithURL:[dic valueForKey:@"preview_url"] placeholderImage:[UIImage imageNamed:@"placeholder"]];
         [dest setValue:image.image forKey:@"placeholder"];
+        [dest setValue:_Source forKey:@"Source"];
         dest.hidesBottomBarWhenPushed=YES;
         
         [self.navigationController pushViewController:dest animated:YES];

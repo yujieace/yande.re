@@ -470,46 +470,10 @@
                     <view key="view" contentMode="scaleToFill" id="KDF-Qa-j5n">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" alwaysBounceVertical="YES" alwaysBounceHorizontal="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7Dc-xM-1xk">
-                                <rect key="frame" x="0.0" y="64" width="600" height="492"/>
-                                <subviews>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="hc8-Fs-yLG">
-                                        <rect key="frame" x="195" y="181" width="209" height="239"/>
-                                    </imageView>
-                                </subviews>
-                                <constraints>
-                                    <constraint firstItem="hc8-Fs-yLG" firstAttribute="width" secondItem="7Dc-xM-1xk" secondAttribute="width" id="3Rv-yw-IR3"/>
-                                    <constraint firstItem="hc8-Fs-yLG" firstAttribute="height" secondItem="7Dc-xM-1xk" secondAttribute="height" id="DwI-CX-Fpg"/>
-                                    <constraint firstItem="hc8-Fs-yLG" firstAttribute="width" secondItem="7Dc-xM-1xk" secondAttribute="width" id="PBg-1z-jCu"/>
-                                </constraints>
-                                <variation key="default">
-                                    <mask key="constraints">
-                                        <exclude reference="PBg-1z-jCu"/>
-                                    </mask>
-                                </variation>
-                            </scrollView>
-                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <constraints>
-                            <constraint firstItem="7Dc-xM-1xk" firstAttribute="top" secondItem="DDI-FP-gau" secondAttribute="bottom" id="cvU-K1-d8z"/>
-                            <constraint firstItem="7Dc-xM-1xk" firstAttribute="width" secondItem="KDF-Qa-j5n" secondAttribute="width" id="mAi-pZ-q6p"/>
-                            <constraint firstItem="D4W-E7-7PU" firstAttribute="top" secondItem="7Dc-xM-1xk" secondAttribute="bottom" id="rVZ-6T-CX2"/>
-                            <constraint firstItem="7Dc-xM-1xk" firstAttribute="height" secondItem="KDF-Qa-j5n" secondAttribute="height" id="uSf-Jb-z1L"/>
-                            <constraint firstItem="7Dc-xM-1xk" firstAttribute="centerX" secondItem="KDF-Qa-j5n" secondAttribute="centerX" id="xhZ-g5-NdP"/>
-                        </constraints>
-                        <variation key="default">
-                            <mask key="constraints">
-                                <exclude reference="uSf-Jb-z1L"/>
-                            </mask>
-                        </variation>
                     </view>
                     <toolbarItems/>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
-                    <connections>
-                        <outlet property="ImageView" destination="hc8-Fs-yLG" id="h8v-np-2EB"/>
-                        <outlet property="scrollview" destination="7Dc-xM-1xk" id="Kv6-Jc-bv0"/>
-                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="S9B-fb-jog" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

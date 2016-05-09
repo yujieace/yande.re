@@ -9,7 +9,7 @@
 #import "ShowDetailPic.h"
 #import <SDWebImage/UIImageView+WebCache.h>
 #import <MBProgressHUD.h>
-
+#import "Singleton.h"
 #define LikeListFile [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES)[0]  stringByAppendingString:@"/LikeList.plist"]
 #define BlackListFile [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES)[0]  stringByAppendingString:@"/BlackList.plist"]
 
@@ -18,10 +18,27 @@
 -(void)viewDidLoad
 {
     [super viewDidLoad];
-    [self initImage];
+    currentIndex=[_index integerValue];
+    [self initImageView];
+    [self initGuesture];
     [self addDownload];
     Preference=[[PreferenceModule alloc] init];
     [self LoadImage];
+    self.navigationController.hidesBarsOnTap=YES;
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(ChangeLayout) name:UIApplicationDidChangeStatusBarOrientationNotification object:nil];
+
+}
+
+-(void)initImageView
+{
+    _ImageView=[[UIImageView alloc] init];
+    _ImageView.multipleTouchEnabled=YES;
+    _ImageView.userInteractionEnabled=YES;
+    [self.view addSubview:_ImageView];
+}
+
+-(void)initGuesture
+{
     UISwipeGestureRecognizer *swipeleft=[[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleSwipeFrom:)];
     swipeleft.direction=UISwipeGestureRecognizerDirectionLeft;
     [_ImageView addGestureRecognizer:swipeleft];
@@ -29,28 +46,28 @@
     UISwipeGestureRecognizer *swiperight=[[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleswpieright:)];
     swiperight.direction=UISwipeGestureRecognizerDirectionRight;
     [_ImageView addGestureRecognizer:swiperight];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(ChangeLayout) name:UIApplicationDidChangeStatusBarOrientationNotification object:nil];
+    
     UIPinchGestureRecognizer *pinch=[[UIPinchGestureRecognizer alloc] initWithTarget:self action:@selector(Pinched:)];
-    
+    [_ImageView addGestureRecognizer:pinch];
 }
--(void)initImage
+-(void)viewWillAppear:(BOOL)animated
 {
-    _scrollview.contentSize=_scrollview.bounds.size;
-    _ImageView.frame=_scrollview.bounds;
-    _scrollview.maximumZoomScale=2.0;
-    _scrollview.minimumZoomScale=0.5;
-    
+    self.view.backgroundColor=[UIColor colorWithRed:0.2 green:0.2 blue:0.2 alpha:1];
+       _ImageView.frame=CGRectMake(0, 0, self.view.bounds.size.width, self.view.bounds.size.height);
+    _ImageView.center=self.view.center;
+    NSLog(@"%f,%f,%f,%f",_ImageView.center.x,_ImageView.center.y,self.view.bounds.size.width,self.self.view.bounds.size.height);
 }
 -(void)addDownload
 {
     download=[[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"download"] style:UIBarButtonItemStyleDone target:self action:@selector(DownLoad)];
     download.enabled=NO;
 }
+
+
 -(void)ChangeLayout
 {
-    if ([[[UIDevice currentDevice] systemVersion] floatValue] < 9.0) {
-        _ImageView.frame=_scrollview.bounds;
-    }
+    _ImageView.frame=CGRectMake(0, 0, self.view.bounds.size.width, self.view.bounds.size.height);
+    _ImageView.center=self.view.center;
 }
 -(void)LoadImage
 {
@@ -58,14 +75,14 @@
     [self initUI];
     MBProgressHUD *progress=[MBProgressHUD showHUDAddedTo:self.view animated:YES];
     progress.mode=MBProgressHUDModeAnnularDeterminate;
-    progress.labelText=@"正在加载:0%";
+    progress.labelText=@"正在加载 0%";
     _ImageView.contentMode=UIViewContentModeScaleAspectFit;
     [_ImageView sd_setImageWithURL:[param valueForKey:@"sample_url"] placeholderImage:_placeholder options:SDWebImageContinueInBackground progress:^(NSInteger receivedSize, NSInteger expectedSize) {
         float task=(float)receivedSize/(float)expectedSize;
         if(task==-0.0)
             task=0;
         progress.progress=task;
-        progress.labelText=[NSString stringWithFormat:@"正在加载:%.1f%@",task*100,@"%"];
+        progress.labelText=[NSString stringWithFormat:@"正在加载 %.1f%@",task*100,@"%"];
         
     } completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
         [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
@@ -118,21 +135,109 @@
 }
 -(void)handleSwipeFrom:(UISwipeGestureRecognizer *)recognizer
 {
-    NSLog(@"切换左");
+    NSLog(@"下一张");
+    if(currentIndex==_Source.count-1)
+    {
+        MBProgressHUD *hud=[[MBProgressHUD alloc ]initWithView:self.view];
+        hud.mode=MBProgressHUDModeText;
+        [self.view addSubview:hud];
+        hud.labelText=@"这是最后一张了哟 ╮(╯▽╰)╭ ";
+        [hud showAnimated:YES whileExecutingBlock:^{
+            sleep(2);
+        } completionBlock:^{
+            [hud removeFromSuperview];
+        }];
+        return;
+    }
+    currentIndex++;
+    MBProgressHUD *progress=[MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    progress.mode=MBProgressHUDModeAnnularDeterminate;
+    progress.labelText=@"正在加载 0%";
+    param=[_Source objectAtIndex:currentIndex];
+    [_ImageView sd_setImageWithURL:[param valueForKey:@"sample_url"] placeholderImage:[UIImage imageNamed:@"placeholder"] options:SDWebImageContinueInBackground progress:^(NSInteger receivedSize, NSInteger expectedSize) {
+        float task=(float)receivedSize/(float)expectedSize;
+        if(task==-0.0)
+            task=0;
+        progress.progress=task;
+        progress.labelText=[NSString stringWithFormat:@"正在加载 %.1f%@",task*100,@"%"];
+        
+    } completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+        [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+        download.enabled=YES;
+    }];
 }
 -(void)handleswpieright:(UISwipeGestureRecognizer *)recognizer;
 {
-    
+    NSLog(@"上一张");
+    if(currentIndex==0)
+    {
+        MBProgressHUD *hud=[[MBProgressHUD alloc ]initWithView:self.view];
+        hud.mode=MBProgressHUDModeText;
+        [self.view addSubview:hud];
+        hud.labelText=@"这是第一张哦 ╮(╯▽╰)╭ ";
+        [hud showAnimated:YES whileExecutingBlock:^{
+            sleep(2);
+        } completionBlock:^{
+            [hud removeFromSuperview];
+        }];
+        
+        return;
+    }
+    currentIndex--;
+    MBProgressHUD *progress=[MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    progress.mode=MBProgressHUDModeAnnularDeterminate;
+    progress.labelText=@"正在加载 0%";
+    param=[_Source objectAtIndex:currentIndex];
+    [_ImageView sd_setImageWithURL:[param valueForKey:@"sample_url"] placeholderImage:[UIImage imageNamed:@"placeholder"] options:SDWebImageContinueInBackground progress:^(NSInteger receivedSize, NSInteger expectedSize) {
+        float task=(float)receivedSize/(float)expectedSize;
+        if(task==-0.0)
+            task=0;
+        progress.progress=task;
+        progress.labelText=[NSString stringWithFormat:@"正在加载 %.1f%@",task*100,@"%"];
+        
+    } completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+        [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+        download.enabled=YES;
+    }];
 }
 
--(void)Pinched:(UIPinchGestureRecognizer *)sender
+-(void)Pinched:(UIPinchGestureRecognizer *)gesture
 {
+    if (gesture.state ==UIGestureRecognizerStateBegan) {
+        
+        currentTransform =_ImageView.transform;
+        
+    }
+    
+    if (gesture.state ==UIGestureRecognizerStateChanged) {
+        
+        CGAffineTransform tr =CGAffineTransformScale(currentTransform, gesture.scale, gesture.scale);
+        
+        _ImageView.transform = tr;
+        
+        _ImageView.frame =CGRectMake(0,0, _ImageView.frame.size.width,_ImageView.frame.size.height);
+        
+        _ImageView.center=self.view.center;
+    }
+    
+    if ((gesture.state ==UIGestureRecognizerStateEnded) || (gesture.state ==UIGestureRecognizerStateCancelled)) {
+        _lastPhotoScale =_lastPhotoScale*gesture.scale;
+        
+    }
+    
 }
 
 -(void)viewWillUnload
 {
     [[NSNotificationCenter defaultCenter] removeObserver:self name:UIApplicationDidChangeStatusBarOrientationNotification object:nil];
+    
 }
+
+-(void)viewWillDisappear:(BOOL)animated
+{
+    self.navigationController.hidesBarsOnTap=NO;
+}
+
 -(void)didReceiveMemoryWarning
 {
 }

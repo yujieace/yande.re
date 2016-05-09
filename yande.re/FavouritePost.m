@@ -12,6 +12,7 @@
 @implementation FavouritePost
 -(void)viewDidLoad
 {
+    Source=[[NSMutableArray alloc] init];
     del=[[CommenPostdelegate alloc] init];
     [self DidSelect];
     pre=[[PreferenceModule alloc] init];
@@ -24,12 +25,12 @@
 -(void)LoadData
 {
     NSArray *array=[pre GetFravouritePostList];
-    NSMutableArray *source=[[NSMutableArray alloc] init];
+    [Source removeAllObjects];
     for (NSDictionary *temp in array) {
         if([RatingFilter Filter:[temp valueForKey:@"info"]])
-        [source addObject:[temp valueForKey:@"info"]];
+        [Source addObject:[temp valueForKey:@"info"]];
     }
-    [del setSource:source];
+    [del setSource:Source];
     [_postCollection reloadData];
     [_postCollection.header endRefreshing];
 }
@@ -45,6 +46,7 @@
         image.contentMode=UIViewContentModeScaleAspectFit;
         [image sd_setImageWithURL:[dic valueForKey:@"preview_url"] placeholderImage:[UIImage imageNamed:@"placeholder"]];
         [dest setValue:image.image forKey:@"placeholder"];
+        [dest setValue:Source forKey:@"Source"];
         dest.hidesBottomBarWhenPushed=YES;
         
         [self.navigationController pushViewController:dest animated:YES];

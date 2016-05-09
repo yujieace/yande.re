@@ -13,6 +13,7 @@
 {
     CommenPostdelegate *del;
     PreferenceModule *pre;
+    NSMutableArray *Source;
 }
 @property (weak, nonatomic) IBOutlet UICollectionView *postCollection;
 

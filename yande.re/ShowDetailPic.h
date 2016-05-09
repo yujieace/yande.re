@@ -15,12 +15,13 @@
     PreferenceModule *Preference;
     UIBarButtonItem *like;
     UIBarButtonItem *download;
-    NSArray *Source;
+    NSInteger currentIndex;
+    CGFloat _lastPhotoScale;
+    CGAffineTransform currentTransform;
 }
 @property (strong, nonatomic) IBOutlet UIImageView *ImageView;
 @property (nonatomic,strong) NSDictionary *param;
-@property (weak, nonatomic) IBOutlet UIScrollView *scrollview;
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *wideConstraint;
 @property (nonatomic,strong) NSString * index;
 @property (nonatomic,strong) UIImage *placeholder;
+@property (nonatomic,strong) NSArray *Source;
 @end
