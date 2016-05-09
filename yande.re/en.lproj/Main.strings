@@ -1,0 +1,21 @@
+
+/* Class = "UINavigationItem"; title = "最新萌图"; ObjectID = "51V-ib-sCq"; */
+"51V-ib-sCq.title" = "最新萌图";
+
+/* Class = "UITabBarItem"; title = "最新萌图"; ObjectID = "6C1-hC-xfS"; */
+"6C1-hC-xfS.title" = "最新萌图";
+
+/* Class = "UITabBarItem"; title = "Tags"; ObjectID = "FMp-Q1-jFF"; */
+"FMp-Q1-jFF.title" = "Tags";
+
+/* Class = "UITabBarItem"; title = "设置"; ObjectID = "JFK-np-Mnf"; */
+"JFK-np-Mnf.title" = "设置";
+
+/* Class = "UITabBarItem"; title = "最新萌图"; ObjectID = "V7x-AQ-gMD"; */
+"V7x-AQ-gMD.title" = "最新萌图";
+
+/* Class = "UILabel"; text = "年龄保护"; ObjectID = "WZI-LT-hVx"; */
+"WZI-LT-hVx.text" = "年龄保护";
+
+/* Class = "UITabBarItem"; title = "收藏"; ObjectID = "dSS-zw-7U7"; */
+"dSS-zw-7U7.title" = "收藏";

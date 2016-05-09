@@ -2,8 +2,8 @@
 //  yande_reTests.m
 //  yande.reTests
 //
-//  Created by hnzc on 16/4/11.
-//  Copyright © 2016年 hnzc. All rights reserved.
+//  Created by 於杰 on 16/4/11.
+//  Copyright © 2016年 於杰. All rights reserved.
 //
 
 #import <XCTest/XCTest.h>
