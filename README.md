@@ -11,8 +11,8 @@
   5、（已实现）下载图片载至相册</br>
   6、批量下载POST和Pool</br>
   7、高清图片放大、缩小、前后切换手势</br>
-  8、根据tag的浏览和收藏
-  9、全局黑名单过滤（tag，author，post，pool）
+  8、根据tag的浏览和收藏</br>
+  9、全局黑名单过滤（tag，author，post，pool）</br>
 
 
-UI自适应，iPhone和iPad均可使用。
+UI自适应，iPhone和iPad均可使用。</br>
