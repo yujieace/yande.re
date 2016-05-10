@@ -2,8 +2,8 @@
 //  ShowDetailPic.m
 //  yande.re
 //  显示流程，加载图片，同时加载偏好文件，匹配id与偏好，如不存在则显示收藏按钮为unlike，反之显示为like，点击后移除偏好文件对应内容，同步写入偏好文件，同时反置按钮状态
-//  Created by 於杰 on 16/4/11.
-//  Copyright © 2016年 於杰. All rights reserved.
+//  Created by YuJie on 16/4/11.
+//  Copyright © 2016年 YuJie. All rights reserved.
 //
 
 #import "ShowDetailPic.h"

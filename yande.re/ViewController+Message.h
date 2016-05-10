@@ -2,8 +2,8 @@
 //  ViewController+Message.h
 //  yande.re
 //
-//  Created by hnzc on 16/5/10.
-//  Copyright © 2016年 hnzc. All rights reserved.
+//  Created by YuJie on 16/5/10.
+//  Copyright © 2016年 YuJie. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>

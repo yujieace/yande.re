@@ -2,8 +2,8 @@
 //  RatingFilter.h
 //  yande.re
 //  评级过滤，评价post是否符合分级
-//  Created by 於杰 on 16/4/12.
-//  Copyright © 2016年 於杰. All rights reserved.
+//  Created by YuJie on 16/4/12.
+//  Copyright © 2016年 YuJie. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>

@@ -2,8 +2,8 @@
 //  NSDate+ToString.m
 //  SanyaCard
 //
-//  Created by 於杰 on 15/10/13.
-//  Copyright © 2015年 於杰. All rights reserved.
+//  Created by YuJie on 15/10/13.
+//  Copyright © 2015年 YuJie. All rights reserved.
 //
 
 #import "NSDate+ToString.h"

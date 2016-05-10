@@ -2,8 +2,8 @@
 //  yande_reUITests.m
 //  yande.reUITests
 //
-//  Created by 於杰 on 16/4/11.
-//  Copyright © 2016年 於杰. All rights reserved.
+//  Created by YuJie on 16/4/11.
+//  Copyright © 2016年 YuJie. All rights reserved.
 //
 
 #import <XCTest/XCTest.h>

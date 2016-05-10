@@ -2,8 +2,8 @@
 //  NSnull+Json.h
 //  Sanya University
 //
-//  Created by 於杰 on 16/4/6.
-//  Copyright © 2016年 於杰. All rights reserved.
+//  Created by YuJie on 16/4/6.
+//  Copyright © 2016年 YuJie. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>

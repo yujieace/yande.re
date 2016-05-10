@@ -2,8 +2,8 @@
 //  UIView+Shadow.m
 //  Sanya University
 //
-//  Created by 於杰 on 16/3/1.
-//  Copyright © 2016年 於杰. All rights reserved.
+//  Created by YuJie on 16/3/1.
+//  Copyright © 2016年 YuJie. All rights reserved.
 //
 
 #import "UIView+Shadow.h"
