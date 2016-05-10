@@ -21,6 +21,7 @@
     NSArray *array=@[title,url,image];
     
     UIActivityViewController *activity=[[UIActivityViewController alloc] initWithActivityItems:array applicationActivities:nil];
+    activity.excludedActivityTypes=@[UIActivityTypeAirDrop];
     if (isPad) {
         UIPopoverController *pop=[[UIPopoverController alloc] initWithContentViewController:activity];
         [pop setPopoverContentSize:CGSizeMake(self.view.bounds.size.width/3,self.view.bounds.size.width/3) animated:YES];
