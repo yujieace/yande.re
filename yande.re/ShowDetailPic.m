@@ -186,8 +186,6 @@
     
     NSMutableDictionary *dic=[[NSMutableDictionary alloc] init];
     [dic setObject:_ImageView.image forKey:@"image"];
-    [dic setObject:[param valueForKey:@"sample_url"] forKey:@"url"];//支持微信分享
-    [dic setObject:@"来自萌妹的萌图" forKey:@"title"];
     __weak __typeof(&*self)weakSelf = self;
     [weakSelf ShowActivityFrom:share with:dic];
     

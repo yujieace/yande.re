@@ -15,13 +15,10 @@
 
 -(void)ShowActivityFrom:(UIBarButtonItem *)barItem with:(NSDictionary *)param
 {
-    NSString *title=[param valueForKey:@"title"];
-    NSURL *url=[NSURL URLWithString:[param valueForKey:@"url"]];
     UIImage *image=[param valueForKey:@"image"];
-    NSArray *array=@[title,url,image];
+    NSArray *array=@[image];
     
     UIActivityViewController *activity=[[UIActivityViewController alloc] initWithActivityItems:array applicationActivities:nil];
-    activity.excludedActivityTypes=@[UIActivityTypeAirDrop];
     if (isPad) {
         UIPopoverController *pop=[[UIPopoverController alloc] initWithContentViewController:activity];
         [pop setPopoverContentSize:CGSizeMake(self.view.bounds.size.width/3,self.view.bounds.size.width/3) animated:YES];
