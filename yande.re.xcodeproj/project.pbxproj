@@ -37,6 +37,8 @@
 		C3984A771CBE442B001E1EBB /* PostsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C3984A761CBE442B001E1EBB /* PostsViewController.m */; };
 		C3984A7D1CBF89CE001E1EBB /* PreferenceModule.m in Sources */ = {isa = PBXBuildFile; fileRef = C3984A7C1CBF89CE001E1EBB /* PreferenceModule.m */; };
 		C3984A801CC0BD93001E1EBB /* NSDate+ToString.m in Sources */ = {isa = PBXBuildFile; fileRef = C3984A7F1CC0BD93001E1EBB /* NSDate+ToString.m */; };
+		C3A328671CE179B70017FA06 /* ViewController+Message.m in Sources */ = {isa = PBXBuildFile; fileRef = C3A328661CE179B70017FA06 /* ViewController+Message.m */; };
+		C3A3286A1CE1B3050017FA06 /* ViewController+Share.m in Sources */ = {isa = PBXBuildFile; fileRef = C3A328691CE1B3050017FA06 /* ViewController+Share.m */; };
 		C3A602581CBCC84E000F7694 /* PoolsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C3A602571CBCC84E000F7694 /* PoolsViewController.m */; };
 		C3BC20BA1CBB4BA6004E29EB /* ComunicationModule.m in Sources */ = {isa = PBXBuildFile; fileRef = C3BC20B91CBB4BA6004E29EB /* ComunicationModule.m */; };
 		C3BC20BE1CBB5090004E29EB /* DataSouce.m in Sources */ = {isa = PBXBuildFile; fileRef = C3BC20BD1CBB5090004E29EB /* DataSouce.m */; };
@@ -148,6 +150,10 @@
 		C3984A7C1CBF89CE001E1EBB /* PreferenceModule.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PreferenceModule.m; sourceTree = "<group>"; };
 		C3984A7E1CC0BD93001E1EBB /* NSDate+ToString.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+ToString.h"; sourceTree = "<group>"; };
 		C3984A7F1CC0BD93001E1EBB /* NSDate+ToString.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+ToString.m"; sourceTree = "<group>"; };
+		C3A328651CE179B70017FA06 /* ViewController+Message.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "ViewController+Message.h"; sourceTree = "<group>"; };
+		C3A328661CE179B70017FA06 /* ViewController+Message.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "ViewController+Message.m"; sourceTree = "<group>"; };
+		C3A328681CE1B3050017FA06 /* ViewController+Share.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "ViewController+Share.h"; sourceTree = "<group>"; };
+		C3A328691CE1B3050017FA06 /* ViewController+Share.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "ViewController+Share.m"; sourceTree = "<group>"; };
 		C3A602561CBCC84E000F7694 /* PoolsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PoolsViewController.h; sourceTree = "<group>"; };
 		C3A602571CBCC84E000F7694 /* PoolsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PoolsViewController.m; sourceTree = "<group>"; };
 		C3BC20B81CBB4BA6004E29EB /* ComunicationModule.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ComunicationModule.h; sourceTree = "<group>"; };
@@ -603,6 +609,10 @@
 				C3984A6D1CBE2485001E1EBB /* NSnull+Json.m */,
 				C3D12D061CBB8DE3004318D7 /* UIView+Shadow.h */,
 				C3D12D051CBB8DE3004318D7 /* UIView+Shadow.m */,
+				C3A328651CE179B70017FA06 /* ViewController+Message.h */,
+				C3A328661CE179B70017FA06 /* ViewController+Message.m */,
+				C3A328681CE1B3050017FA06 /* ViewController+Share.h */,
+				C3A328691CE1B3050017FA06 /* ViewController+Share.m */,
 			);
 			name = category;
 			sourceTree = "<group>";
@@ -791,6 +801,7 @@
 				C3774A601CD1FD0E0091990A /* AdvancedTabBarController.m in Sources */,
 				C3D12CFD1CBB8B74004318D7 /* MJRefreshNormalHeader.m in Sources */,
 				C3D12CFE1CBB8B74004318D7 /* MJRefreshStateHeader.m in Sources */,
+				C3A328671CE179B70017FA06 /* ViewController+Message.m in Sources */,
 				C3774A6F1CD20C150091990A /* TagsViewController.m in Sources */,
 				C3D12CFC1CBB8B74004318D7 /* MJRefreshGifHeader.m in Sources */,
 				C3D12D121CBBA82F004318D7 /* SplahView.m in Sources */,
@@ -819,6 +830,7 @@
 				C3BC20BA1CBB4BA6004E29EB /* ComunicationModule.m in Sources */,
 				C3D12CF91CBB8B74004318D7 /* MJRefreshBackGifFooter.m in Sources */,
 				C3D12CF51CBB8B74004318D7 /* MJRefreshHeader.m in Sources */,
+				C3A3286A1CE1B3050017FA06 /* ViewController+Share.m in Sources */,
 				C3774A631CD1FDE10091990A /* Utils.m in Sources */,
 				C3D12CF81CBB8B74004318D7 /* MJRefreshAutoStateFooter.m in Sources */,
 				C32561BE1CD0A66F009D3EC5 /* DLSlideView.m in Sources */,

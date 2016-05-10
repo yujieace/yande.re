@@ -9,7 +9,9 @@
 #import "ShowDetailPic.h"
 #import <SDWebImage/UIImageView+WebCache.h>
 #import <MBProgressHUD.h>
-#import "Singleton.h"
+#import <Social/Social.h>
+#import "ViewController+Message.h"
+#import "ViewController+Share.h"
 #define LikeListFile [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES)[0]  stringByAppendingString:@"/LikeList.plist"]
 #define BlackListFile [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES)[0]  stringByAppendingString:@"/BlackList.plist"]
 
@@ -49,6 +51,7 @@
     
     UIPinchGestureRecognizer *pinch=[[UIPinchGestureRecognizer alloc] initWithTarget:self action:@selector(Pinched:)];
     [_ImageView addGestureRecognizer:pinch];
+    
 }
 -(void)viewWillAppear:(BOOL)animated
 {
@@ -99,7 +102,9 @@
     like=[[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:name] style:UIBarButtonItemStyleDone target:self action:@selector(AddFavourite)];
     if(isLiked)
         like.tintColor=[UIColor redColor];
-    self.navigationItem.rightBarButtonItems=@[like,download];
+    share=[[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"share"] style:UIBarButtonItemStyleDone target:self action:@selector(Share)];
+    
+    self.navigationItem.rightBarButtonItems=@[like,download,share];
 }
 
 -(void)DownLoad
@@ -108,21 +113,14 @@
 }
 - (void)imageSavedToPhotosAlbum:(UIImage *)image didFinishSavingWithError:(NSError *)error contextInfo:(void *)contextInfo
 {
-    MBProgressHUD *hud=[[MBProgressHUD alloc ]initWithView:self.view];
-    hud.mode=MBProgressHUDModeText;
-    [self.view addSubview:hud];
     if (!error) {
-        hud.labelText=@"保存成功";
+        [self ShowMessage:@"保存成功" InSeconds:2];
     }else
     {
-        hud.labelText=@"保存失败";
+        [self ShowMessage:@"保存失败" InSeconds:2];
     }
     
-    [hud showAnimated:YES whileExecutingBlock:^{
-        sleep(2);
-    } completionBlock:^{
-        [hud removeFromSuperview];
-    }];
+    
 }
 -(void)AddFavourite
 {
@@ -138,15 +136,7 @@
     NSLog(@"下一张");
     if(currentIndex==_Source.count-1)
     {
-        MBProgressHUD *hud=[[MBProgressHUD alloc ]initWithView:self.view];
-        hud.mode=MBProgressHUDModeText;
-        [self.view addSubview:hud];
-        hud.labelText=@"这是最后一张了哟 ╮(╯▽╰)╭ ";
-        [hud showAnimated:YES whileExecutingBlock:^{
-            sleep(2);
-        } completionBlock:^{
-            [hud removeFromSuperview];
-        }];
+        [self ShowMessage:@"这是最后一张了哟 ╮(╯▽╰)╭ " InSeconds:2];
         return;
     }
     currentIndex++;
@@ -171,16 +161,7 @@
     NSLog(@"上一张");
     if(currentIndex==0)
     {
-        MBProgressHUD *hud=[[MBProgressHUD alloc ]initWithView:self.view];
-        hud.mode=MBProgressHUDModeText;
-        [self.view addSubview:hud];
-        hud.labelText=@"这是第一张哦 ╮(╯▽╰)╭ ";
-        [hud showAnimated:YES whileExecutingBlock:^{
-            sleep(2);
-        } completionBlock:^{
-            [hud removeFromSuperview];
-        }];
-        
+        [self ShowMessage:@"这是第一张哦 ╮(╯▽╰)╭ " InSeconds:2];
         return;
     }
     currentIndex--;
@@ -200,7 +181,17 @@
         download.enabled=YES;
     }];
 }
-
+-(void)Share
+{
+    
+    NSMutableDictionary *dic=[[NSMutableDictionary alloc] init];
+    [dic setObject:_ImageView.image forKey:@"image"];
+    [dic setObject:[param valueForKey:@"sample_url"] forKey:@"url"];//支持微信分享
+    [dic setObject:@"来自萌妹的萌图" forKey:@"title"];
+    __weak __typeof(&*self)weakSelf = self;
+    [weakSelf ShowActivityFrom:share with:dic];
+    
+}
 -(void)Pinched:(UIPinchGestureRecognizer *)gesture
 {
     if (gesture.state ==UIGestureRecognizerStateBegan) {
@@ -237,7 +228,6 @@
 {
     self.navigationController.hidesBarsOnTap=NO;
 }
-
 -(void)didReceiveMemoryWarning
 {
 }

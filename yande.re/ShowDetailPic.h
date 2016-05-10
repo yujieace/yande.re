@@ -9,12 +9,13 @@
 #import <UIKit/UIKit.h>
 #import "PreferenceModule.h"
 
-@interface ShowDetailPic : UIViewController<UIGestureRecognizerDelegate>
+@interface ShowDetailPic : UIViewController
 {
     BOOL isLiked;
     PreferenceModule *Preference;
     UIBarButtonItem *like;
     UIBarButtonItem *download;
+    UIBarButtonItem *share;
     NSInteger currentIndex;
     CGFloat _lastPhotoScale;
     CGAffineTransform currentTransform;
