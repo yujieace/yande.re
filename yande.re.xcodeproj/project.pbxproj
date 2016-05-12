@@ -39,6 +39,7 @@
 		C3984A801CC0BD93001E1EBB /* NSDate+ToString.m in Sources */ = {isa = PBXBuildFile; fileRef = C3984A7F1CC0BD93001E1EBB /* NSDate+ToString.m */; };
 		C3A328671CE179B70017FA06 /* ViewController+Message.m in Sources */ = {isa = PBXBuildFile; fileRef = C3A328661CE179B70017FA06 /* ViewController+Message.m */; };
 		C3A3286A1CE1B3050017FA06 /* ViewController+Share.m in Sources */ = {isa = PBXBuildFile; fileRef = C3A328691CE1B3050017FA06 /* ViewController+Share.m */; };
+		C3A3286D1CE3053D0017FA06 /* PhoteViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C3A3286C1CE3053D0017FA06 /* PhoteViewController.m */; };
 		C3A602581CBCC84E000F7694 /* PoolsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C3A602571CBCC84E000F7694 /* PoolsViewController.m */; };
 		C3BC20BA1CBB4BA6004E29EB /* ComunicationModule.m in Sources */ = {isa = PBXBuildFile; fileRef = C3BC20B91CBB4BA6004E29EB /* ComunicationModule.m */; };
 		C3BC20BE1CBB5090004E29EB /* DataSouce.m in Sources */ = {isa = PBXBuildFile; fileRef = C3BC20BD1CBB5090004E29EB /* DataSouce.m */; };
@@ -62,7 +63,6 @@
 		C3D12D021CBB8B74004318D7 /* UIScrollView+MJRefresh.m in Sources */ = {isa = PBXBuildFile; fileRef = C3D12CEE1CBB8B74004318D7 /* UIScrollView+MJRefresh.m */; };
 		C3D12D031CBB8B74004318D7 /* UIView+MJExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = C3D12CF01CBB8B74004318D7 /* UIView+MJExtension.m */; };
 		C3D12D071CBB8DE3004318D7 /* UIView+Shadow.m in Sources */ = {isa = PBXBuildFile; fileRef = C3D12D051CBB8DE3004318D7 /* UIView+Shadow.m */; };
-		C3D12D0A1CBB9850004318D7 /* ShowDetailPic.m in Sources */ = {isa = PBXBuildFile; fileRef = C3D12D091CBB9850004318D7 /* ShowDetailPic.m */; };
 		C3D12D0D1CBB9F7A004318D7 /* Singleton.m in Sources */ = {isa = PBXBuildFile; fileRef = C3D12D0C1CBB9F7A004318D7 /* Singleton.m */; };
 		C3D12D121CBBA82F004318D7 /* SplahView.m in Sources */ = {isa = PBXBuildFile; fileRef = C3D12D111CBBA82F004318D7 /* SplahView.m */; };
 		C3D6BDDE1CBC99A200F73B1F /* RatingFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = C3D6BDDD1CBC99A200F73B1F /* RatingFilter.m */; };
@@ -154,6 +154,8 @@
 		C3A328661CE179B70017FA06 /* ViewController+Message.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "ViewController+Message.m"; sourceTree = "<group>"; };
 		C3A328681CE1B3050017FA06 /* ViewController+Share.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "ViewController+Share.h"; sourceTree = "<group>"; };
 		C3A328691CE1B3050017FA06 /* ViewController+Share.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "ViewController+Share.m"; sourceTree = "<group>"; };
+		C3A3286B1CE3053D0017FA06 /* PhoteViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhoteViewController.h; sourceTree = "<group>"; };
+		C3A3286C1CE3053D0017FA06 /* PhoteViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhoteViewController.m; sourceTree = "<group>"; };
 		C3A602561CBCC84E000F7694 /* PoolsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PoolsViewController.h; sourceTree = "<group>"; };
 		C3A602571CBCC84E000F7694 /* PoolsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PoolsViewController.m; sourceTree = "<group>"; };
 		C3BC20B81CBB4BA6004E29EB /* ComunicationModule.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ComunicationModule.h; sourceTree = "<group>"; };
@@ -200,8 +202,6 @@
 		C3D12CF01CBB8B74004318D7 /* UIView+MJExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+MJExtension.m"; sourceTree = "<group>"; };
 		C3D12D051CBB8DE3004318D7 /* UIView+Shadow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Shadow.m"; sourceTree = "<group>"; };
 		C3D12D061CBB8DE3004318D7 /* UIView+Shadow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Shadow.h"; sourceTree = "<group>"; };
-		C3D12D081CBB9850004318D7 /* ShowDetailPic.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShowDetailPic.h; sourceTree = "<group>"; };
-		C3D12D091CBB9850004318D7 /* ShowDetailPic.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShowDetailPic.m; sourceTree = "<group>"; };
 		C3D12D0B1CBB9F7A004318D7 /* Singleton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Singleton.h; sourceTree = "<group>"; };
 		C3D12D0C1CBB9F7A004318D7 /* Singleton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Singleton.m; sourceTree = "<group>"; };
 		C3D12D101CBBA82F004318D7 /* SplahView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SplahView.h; sourceTree = "<group>"; };
@@ -381,8 +381,8 @@
 		C3774A651CD1FE390091990A /* 查看图片详情 */ = {
 			isa = PBXGroup;
 			children = (
-				C3D12D081CBB9850004318D7 /* ShowDetailPic.h */,
-				C3D12D091CBB9850004318D7 /* ShowDetailPic.m */,
+				C3A3286B1CE3053D0017FA06 /* PhoteViewController.h */,
+				C3A3286C1CE3053D0017FA06 /* PhoteViewController.m */,
 			);
 			name = "查看图片详情";
 			sourceTree = "<group>";
@@ -808,6 +808,7 @@
 				C3D12D031CBB8B74004318D7 /* UIView+MJExtension.m in Sources */,
 				C3984A6B1CBCDF66001E1EBB /* PoolsSource.m in Sources */,
 				C32561D31CD1A2BF009D3EC5 /* TagsManager.m in Sources */,
+				C3A3286D1CE3053D0017FA06 /* PhoteViewController.m in Sources */,
 				C3D12CFA1CBB8B74004318D7 /* MJRefreshBackNormalFooter.m in Sources */,
 				C32561C01CD0A66F009D3EC5 /* DLScrollTabbarView.m in Sources */,
 				C3D12D001CBB8B74004318D7 /* MJRefreshConst.m in Sources */,
@@ -836,7 +837,6 @@
 				C32561BE1CD0A66F009D3EC5 /* DLSlideView.m in Sources */,
 				C3D12CF41CBB8B74004318D7 /* MJRefreshFooter.m in Sources */,
 				C32561C81CD0A9C7009D3EC5 /* FavouritePost.m in Sources */,
-				C3D12D0A1CBB9850004318D7 /* ShowDetailPic.m in Sources */,
 				C32561BD1CD0A66F009D3EC5 /* DLCustomSlideView.m in Sources */,
 				C32561C11CD0A66F009D3EC5 /* DLTabedSlideView.m in Sources */,
 				C3D12CFB1CBB8B74004318D7 /* MJRefreshBackStateFooter.m in Sources */,

@@ -459,10 +459,10 @@
             </objects>
             <point key="canvasLocation" x="775" y="363"/>
         </scene>
-        <!--Show Detail Pic-->
+        <!--Phote View Controller-->
         <scene sceneID="SYd-Fj-cU6">
             <objects>
-                <viewController storyboardIdentifier="ShowDetailView" id="kSm-jt-TPB" customClass="ShowDetailPic" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ShowDetailView" id="kSm-jt-TPB" customClass="PhoteViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="DDI-FP-gau"/>
                         <viewControllerLayoutGuide type="bottom" id="D4W-E7-7PU"/>
@@ -470,10 +470,41 @@
                     <view key="view" contentMode="scaleToFill" id="KDF-Qa-j5n">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" pagingEnabled="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="Jnd-yl-HXc">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="eA1-vo-noD">
+                                    <size key="itemSize" width="155" height="152"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="PIC" id="chd-HZ-YXe">
+                                        <rect key="frame" x="0.0" y="64" width="155" height="152"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                            <rect key="frame" x="0.0" y="0.0" width="155" height="152"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        </view>
+                                    </collectionViewCell>
+                                </cells>
+                            </collectionView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="Jnd-yl-HXc" firstAttribute="centerX" secondItem="KDF-Qa-j5n" secondAttribute="centerX" id="M0s-pQ-Gef"/>
+                            <constraint firstItem="Jnd-yl-HXc" firstAttribute="centerY" secondItem="KDF-Qa-j5n" secondAttribute="centerY" id="UKL-2l-R25"/>
+                            <constraint firstItem="Jnd-yl-HXc" firstAttribute="width" secondItem="KDF-Qa-j5n" secondAttribute="width" id="ppw-Pu-pf9"/>
+                            <constraint firstItem="Jnd-yl-HXc" firstAttribute="height" secondItem="KDF-Qa-j5n" secondAttribute="height" id="rDx-f4-jdr"/>
+                        </constraints>
                     </view>
                     <toolbarItems/>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
+                    <connections>
+                        <outlet property="collection" destination="Jnd-yl-HXc" id="Fac-2G-LuZ"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="S9B-fb-jog" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
