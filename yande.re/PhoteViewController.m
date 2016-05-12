@@ -33,6 +33,7 @@
 -(void)ChangeLayout
 {
     [_collection reloadData];
+    _collection.contentOffset=CGPointMake(currentIndex*self.view.bounds.size.width, _collection.contentOffset.y);
 }
 -(void)viewWillDisappear:(BOOL)animated
 {
