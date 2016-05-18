@@ -38,7 +38,7 @@
                 NSData *infodata=[NSJSONSerialization dataWithJSONObject:temp options:NSJSONWritingPrettyPrinted error:nil];
                 NSString *info=[[NSString alloc] initWithData:infodata encoding:NSUTF8StringEncoding];
                 NSString *insertsql=[NSString stringWithFormat:@"insert into tags values('%@','%@',%@,'%@');",[temp valueForKey:@"id"],[temp valueForKey:@"name"],[temp valueForKey:@"count"],info];
-               BOOL insertresult=[DB executeUpdate:insertsql];
+               [DB executeUpdate:insertsql];
             }
              
         }
@@ -82,7 +82,7 @@
                 NSData *infodata=[NSJSONSerialization dataWithJSONObject:temp options:NSJSONWritingPrettyPrinted error:nil];
                 NSString *info=[[NSString alloc] initWithData:infodata encoding:NSUTF8StringEncoding];
                 NSString *insertsql=[NSString stringWithFormat:@"insert into newtags values('%@','%@',%@,'%@');",[temp valueForKey:@"id"],[temp valueForKey:@"name"],[temp valueForKey:@"count"],info];
-                BOOL insertresult=[DB executeUpdate:insertsql];
+                [DB executeUpdate:insertsql];
             }
             NSLog(@"最新tag更新完成");
         }
@@ -102,7 +102,7 @@
                 NSData *infodata=[NSJSONSerialization dataWithJSONObject:temp options:NSJSONWritingPrettyPrinted error:nil];
                 NSString *info=[[NSString alloc] initWithData:infodata encoding:NSUTF8StringEncoding];
                 NSString *insertsql=[NSString stringWithFormat:@"insert into tags values('%@','%@',%@,'%@');",[temp valueForKey:@"id"],[temp valueForKey:@"name"],[temp valueForKey:@"count"],info];
-                BOOL insertresult=[DB executeUpdate:insertsql];
+                [DB executeUpdate:insertsql];
             }
             NSLog(@"最热tag更新完成");
         }
@@ -130,7 +130,6 @@
     }
     
     return array;
-    return nil;
 }
 -(BOOL)checkNewest
 {

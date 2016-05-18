@@ -27,6 +27,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     _page=1;
+    
     self.view.layer.contents=(__bridge id _Nullable)([UIImage imageNamed:@"logo"].CGImage);
     _Source=[[NSMutableArray alloc] init];
     _collectView.header.backgroundColor=[UIColor clearColor];

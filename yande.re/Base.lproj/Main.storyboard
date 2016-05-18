@@ -451,18 +451,69 @@
                     <view key="view" contentMode="scaleToFill" id="9Bm-7V-Eca">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <searchBar contentMode="redraw" ambiguous="YES" misplaced="YES" searchBarStyle="minimal" placeholder="搜索关键tag" translatesAutoresizingMaskIntoConstraints="NO" id="Amk-m5-ynL">
+                                <rect key="frame" x="0.0" y="28" width="600" height="44"/>
+                                <textInputTraits key="textInputTraits" returnKeyType="search"/>
+                                <connections>
+                                    <outlet property="delegate" destination="9A6-Bt-fet" id="E9F-NB-Mm0"/>
+                                </connections>
+                            </searchBar>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="以下为最新热门tag" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0xm-qn-VFZ">
+                                <rect key="frame" x="228" y="79" width="144" height="21"/>
+                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="14"/>
+                                <color key="textColor" red="0.40173216540404044" green="0.40173216540404044" blue="0.40173216540404044" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="j0p-lZ-rUX">
+                                <rect key="frame" x="0.0" y="125" width="595" height="318"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="duK-KX-fIl">
+                                    <size key="itemSize" width="83" height="37"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="Cell" id="Yic-hl-Vj3">
+                                        <rect key="frame" x="0.0" y="0.0" width="83" height="37"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                            <rect key="frame" x="0.0" y="0.0" width="83" height="37"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        </view>
+                                    </collectionViewCell>
+                                </cells>
+                            </collectionView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="j0p-lZ-rUX" firstAttribute="centerX" secondItem="9Bm-7V-Eca" secondAttribute="centerX" id="ATM-4z-DXh"/>
+                            <constraint firstItem="0xm-qn-VFZ" firstAttribute="centerX" secondItem="Amk-m5-ynL" secondAttribute="centerX" id="Pyv-i9-JHL"/>
+                            <constraint firstItem="Amk-m5-ynL" firstAttribute="centerX" secondItem="9Bm-7V-Eca" secondAttribute="centerX" id="WZT-1H-Pic"/>
+                            <constraint firstItem="Amk-m5-ynL" firstAttribute="width" secondItem="9Bm-7V-Eca" secondAttribute="width" id="Zza-ce-fl8"/>
+                            <constraint firstItem="bss-Kz-bbY" firstAttribute="top" secondItem="j0p-lZ-rUX" secondAttribute="bottom" id="dpi-9c-Oso"/>
+                            <constraint firstItem="0xm-qn-VFZ" firstAttribute="top" secondItem="Amk-m5-ynL" secondAttribute="bottom" constant="7" id="lwO-5T-PVv"/>
+                            <constraint firstItem="j0p-lZ-rUX" firstAttribute="top" secondItem="0xm-qn-VFZ" secondAttribute="bottom" constant="30" id="qLD-IW-gZP"/>
+                            <constraint firstItem="j0p-lZ-rUX" firstAttribute="width" secondItem="9Bm-7V-Eca" secondAttribute="width" multiplier="0.9" id="req-tx-A4C"/>
+                            <constraint firstItem="j0p-lZ-rUX" firstAttribute="leading" secondItem="Amk-m5-ynL" secondAttribute="trailing" constant="-595" id="vmi-x5-RN6"/>
+                        </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="Tags" image="tags" id="FMp-Q1-jFF"/>
+                    <connections>
+                        <outlet property="SearchBar" destination="Amk-m5-ynL" id="UAn-RW-Jpa"/>
+                        <outlet property="collection" destination="j0p-lZ-rUX" id="EjX-A1-1VC"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dSF-qs-pkD" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="775" y="363"/>
         </scene>
-        <!--Phote View Controller-->
+        <!--Photo View Controller-->
         <scene sceneID="SYd-Fj-cU6">
             <objects>
-                <viewController storyboardIdentifier="ShowDetailView" id="kSm-jt-TPB" customClass="PhoteViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ShowDetailView" id="kSm-jt-TPB" customClass="PhotoViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="DDI-FP-gau"/>
                         <viewControllerLayoutGuide type="bottom" id="D4W-E7-7PU"/>

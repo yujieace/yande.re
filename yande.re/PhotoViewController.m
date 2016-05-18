@@ -6,17 +6,18 @@
 //  Copyright © 2016年 hnzc. All rights reserved.
 //
 
-#import "PhoteViewController.h"
+#import "PhotoViewController.h"
 #import "ViewController+Message.h"
 #import "ViewController+Share.h"
 #import <SDWebImage/UIImageView+WebCache.h>
 #import <MBProgressHUD.h>
+#import "ZoomImageView.h"
 #import "PreferenceModule.h"
-@interface PhoteViewController ()
+@interface PhotoViewController ()
 
 @end
 
-@implementation PhoteViewController
+@implementation PhotoViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -37,8 +38,6 @@
 }
 -(void)viewWillDisappear:(BOOL)animated
 {
-    _collection.dataSource=nil;
-    _collection.delegate=nil;
     self.navigationController.hidesBarsOnTap=NO;
     [[NSNotificationCenter defaultCenter] removeObserver:self name:UIApplicationDidChangeStatusBarOrientationNotification object:nil];
 }
@@ -117,15 +116,6 @@
     isLiked=[Preference isPostLiked:_param];
     [self initBarBtn];
 }
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 #pragma Collection Protocol
 
@@ -146,7 +136,7 @@
     UIImageView *imageview=[cell viewWithTag:2];
     if(imageview==nil)
     {
-        imageview=[[UIImageView alloc] init];
+        imageview=[[UIImageView alloc] initWithFrame:cell.bounds];
         imageview.tag=2;
         imageview.backgroundColor=[UIColor colorWithRed:0.1 green:0.1 blue:0.1 alpha:1];
         imageview.contentMode=UIViewContentModeScaleAspectFit;
@@ -215,33 +205,9 @@
             share.enabled=YES;
             
         }
+        [self initBarBtn];
         
     }
 }
-/*
--(void)Pinched:(UIPinchGestureRecognizer *)gesture
-{
-    if (gesture.state ==UIGestureRecognizerStateBegan) {
-        
-        currentTransform =_ImageView.transform;
-        
-    }
-    
-    if (gesture.state ==UIGestureRecognizerStateChanged) {
-        
-        CGAffineTransform tr =CGAffineTransformScale(currentTransform, gesture.scale, gesture.scale);
-        
-        _ImageView.transform = tr;
-        
-        _ImageView.frame =CGRectMake(0,0, _ImageView.frame.size.width,_ImageView.frame.size.height);
-        
-        _ImageView.center=self.view.center;
-    }
-    
-    if ((gesture.state ==UIGestureRecognizerStateEnded) || (gesture.state ==UIGestureRecognizerStateCancelled)) {
-        _lastPhotoScale =_lastPhotoScale*gesture.scale;
-        
-    }
-    
-}*/
+
 @end

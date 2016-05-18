@@ -7,7 +7,6 @@
 //
 
 #import "CommenPostdelegate.h"
-
 @implementation CommenPostdelegate
 -(instancetype)init
 {
@@ -42,6 +41,7 @@
 -(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     UICollectionViewCell *cell=[collectionView dequeueReusableCellWithReuseIdentifier:@"Cell" forIndexPath:indexPath];
+
     NSDictionary *dic=[Source objectAtIndex:indexPath.row];
     UIImageView *image=[cell viewWithTag:2];
     if(image==nil)
@@ -63,6 +63,9 @@
     label.textColor=[UIColor whiteColor];
     cell.backgroundColor=[UIColor whiteColor];
     [cell addSubview:label];
+    
+    
+    
     if(CellModifyBlock!=nil)
     {
         CellModifyBlock(cell,indexPath,dic);

@@ -1,5 +1,5 @@
 //
-//  PhoteViewController.h
+//  PhotoViewController.h
 //  yande.re
 //
 //  Created by hnzc on 16/5/11.
@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "PreferenceModule.h"
-@interface PhoteViewController : UIViewController<UICollectionViewDataSource,UICollectionViewDelegate,UICollectionViewDelegateFlowLayout>
+@interface PhotoViewController : UIViewController<UICollectionViewDataSource,UICollectionViewDelegate,UICollectionViewDelegateFlowLayout>
 {
     UIScrollView *scrollview;
     
