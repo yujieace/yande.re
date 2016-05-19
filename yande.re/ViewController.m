@@ -28,7 +28,10 @@
     [super viewDidLoad];
     _page=1;
     
-    self.view.layer.contents=(__bridge id _Nullable)([UIImage imageNamed:@"logo"].CGImage);
+    if([_Mode isEqualToString:@"SEARCHMODE"])
+    {
+        self.title=[NSString stringWithFormat:@"%@的搜索结果",_keyTag];
+    }
     _Source=[[NSMutableArray alloc] init];
     _collectView.header.backgroundColor=[UIColor clearColor];
     _collectView.header=[MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(loadData)];
@@ -53,8 +56,11 @@
     }];
     _collectView.dataSource=del;
     _collectView.delegate=del;
-    NSMutableDictionary *shared=[Singleton GetSharedData];
-    [_Source addObjectsFromArray:[shared valueForKey:@"Source"]];
+    if(![_Mode isEqualToString:@"SEARCHMODE"])
+    {
+        NSMutableDictionary *shared=[Singleton GetSharedData];
+        [_Source addObjectsFromArray:[shared valueForKey:@"Source"]];
+    }
     [del setSource:_Source];
     [_collectView reloadData];
     [_collectView.header beginRefreshing];
@@ -70,6 +76,10 @@
 {
     NSMutableDictionary *dic=[[NSMutableDictionary alloc] init];
     [dic setObject:@"1000" forKey:@"limit"];
+    if([_Mode isEqualToString:@"SEARCHMODE"])
+    {
+        [dic setObject:_keyTag forKey:@"tags"];
+    }
     [dic setObject:[NSString stringWithFormat:@"%ld",(long)_page] forKey:@"page"];
     DataSouce *data=[[DataSouce alloc] init];
     data.delegate=self;

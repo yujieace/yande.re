@@ -9,12 +9,18 @@
 #import "TagsViewController.h"
 #import "TagsManager.h"
 #import "TagsDelegate.h"
+#import <pop/POPSpringAnimation.h>
+#import "TableDelegate.h"
+#import <MBProgressHUD.h>
 @interface TagsViewController ()<UISearchBarDelegate>
 {
     NSMutableArray *tags;
     TagsDelegate *tagsDelegate;
     TagsManager *manager;
     UIView *shadowView;
+    UITableView *searchResult;
+    TableDelegate *tabledel;
+    UITapGestureRecognizer *tap;
 }
 @property (weak, nonatomic) IBOutlet UISearchBar *SearchBar;
 @property (weak, nonatomic) IBOutlet UICollectionView *collection;
@@ -24,7 +30,6 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
     manager=[[TagsManager alloc] init];
     [self initShadowView];
     
@@ -34,55 +39,65 @@
     __weak __typeof(&*self)weakSelf = self;
     [tagsDelegate setTagDidTapedBlock:^(NSIndexPath *indexPath, NSDictionary *tag) {
         weakSelf.SearchBar.text=[tag valueForKey:@"name"];
+        [weakSelf StartSearch];
     }];
     _collection.delegate=tagsDelegate;
     _collection.dataSource=tagsDelegate;
     [_collection reloadData];
-    
-    //获取热门的10个tag 最新的10个tag
-    //初始化tag列表，搜索关键字查询
-    dispatch_async(dispatch_get_global_queue(0, 0), ^{
-        // something
-        [manager installTagsDataBase];
-        [manager UpdateNewset];
-        [manager UpdatePopularTag];
-    });
-    // Do any additional setup after loading the view.
-}
--(void)initShadowView
-{
-    shadowView=[[UIView alloc] initWithFrame:CGRectMake(0, _SearchBar.bounds.size.height+25, self.view.bounds.size.width, self.view.bounds.size.height-(_SearchBar.bounds.size.height+25))];
-    shadowView.backgroundColor=[UIColor blackColor];
-    shadowView.alpha=0.6;
-    UITapGestureRecognizer *tap=[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(HideShadowView)];
-    [shadowView addGestureRecognizer:tap];
-}
--(void)GetTags
-{
-    NSArray *popularTags=[manager SelectTop:5];
-    NSArray *newTags=[manager SelectNewset:5];
-    [tags addObjectsFromArray:popularTags];
-    [tags addObjectsFromArray:newTags];
+    [manager installTagsDataBase];
 }
 
+/**
+ *  初始化遮罩层
+ */
+-(void)initShadowView
+{
+    shadowView=[[UIView alloc] initWithFrame:CGRectMake(0, _SearchBar.frame.origin.y+_SearchBar.bounds.size.height, self.view.bounds.size.width, self.view.bounds.size.height-(_SearchBar.frame.origin.y+_SearchBar.bounds.size.height))];
+    shadowView.backgroundColor=[UIColor clearColor];
+    UIVisualEffectView *effect=[[UIVisualEffectView alloc] initWithFrame:shadowView.bounds];
+    effect.effect=[UIBlurEffect effectWithStyle:UIBlurEffectStyleDark];
+    [shadowView addSubview:effect];
+
+    tap=[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(HideShadowView)];
+    [effect addGestureRecognizer:tap];
+}
+
+/**
+ *  读取数据库中的tag
+ */
+-(void)GetTags
+{
+    NSArray *popularTags=[manager SelectTop:20];
+    //NSArray *newTags=[manager SelectNewset:5];
+    [tags addObjectsFromArray:popularTags];
+    //[tags addObjectsFromArray:newTags];
+}
+
+/**
+ *  隐藏遮罩层
+ */
 -(void)HideShadowView
 {
     [UIView animateWithDuration:0.3 animations:^{
         shadowView.alpha=0;
     } completion:^(BOOL finished) {
        [shadowView removeFromSuperview];
-        shadowView.alpha=0.6;
+        shadowView.alpha=1;
         _SearchBar.showsCancelButton=NO;
         [_SearchBar endEditing:YES];
     }];
     
 }
+
+/**
+ *  显示遮罩层
+ */
 -(void)ShowShadowView
 {
     shadowView.alpha=0;
     [self.view addSubview:shadowView];
     [UIView animateWithDuration:0.3 animations:^{
-        shadowView.alpha=0.6;
+       shadowView.alpha=1;
     } completion:^(BOOL finished) {
     }];
 }
@@ -103,14 +118,79 @@
 -(void)searchBarSearchButtonClicked:(UISearchBar *)searchBar
 {
     NSLog(@"SearchBarClicked");
+    if(_SearchBar.text.length>0)
+    {
+        [self StartSearch];
+    }
 }
-
+-(void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText
+{
+    [self ShowTips];
+    [searchResult reloadData];
+}
 -(void)searchBarCancelButtonClicked:(UISearchBar *)searchBar
 {
-    NSLog(@"Cancled");
     _SearchBar.showsCancelButton=NO;
     [_SearchBar endEditing:YES];
     [self HideShadowView];
+}
+
+/**
+ *  开始搜索
+ */
+-(void)StartSearch
+{
+    NSString *tag=_SearchBar.text;
+    UIViewController *dest=[self.storyboard instantiateViewControllerWithIdentifier:@"MainView"];
+    [dest setValue:@"SEARCHMODE" forKey:@"Mode"];
+    [dest setValue:tag forKey:@"keyTag"];
+    [self.navigationController pushViewController:dest animated:YES];
+}
+
+/**
+ *  显示数据库内联想数据
+ */
+-(void)ShowTips
+{
+    NSArray *tagsSource=[manager QuerynameLike:_SearchBar.text];
+    CGFloat height=0;
+    if(tagsSource.count>=5)
+    {
+        height=175;
+    }
+    else
+    {
+        height=35*tagsSource.count;
+    }
+    
+    if(searchResult==nil)
+    {
+        searchResult=[[UITableView alloc] initWithFrame:CGRectMake(0, 0, shadowView.bounds.size.width, height)];
+        tabledel=[[TableDelegate alloc] init];
+        [tabledel setValue:tagsSource forKey:@"Source"];
+        __weak __typeof(&*self)weakSelf = self;
+        [tabledel SettagBlock:^(NSIndexPath *indexPath, NSDictionary *tag) {
+            [weakSelf.SearchBar endEditing:YES];
+            [weakSelf HideShadowView];
+            weakSelf.SearchBar.text=[tag valueForKey:@"name"];
+            [weakSelf StartSearch];
+        }];
+        searchResult.separatorStyle=UITableViewCellSeparatorStyleNone;
+        searchResult.backgroundColor=[UIColor clearColor];
+        searchResult.dataSource=tabledel;
+        searchResult.delegate=tabledel;
+        [shadowView addSubview:searchResult];
+        [searchResult reloadData];
+    }
+    else
+    {
+        [tabledel setValue:tagsSource forKey:@"Source"];
+        POPSpringAnimation *pop=[POPSpringAnimation animationWithPropertyNamed:kPOPViewFrame];
+        pop.toValue=[NSValue valueWithCGRect:CGRectMake(0, 0, shadowView.bounds.size.width, height)];
+        [searchResult pop_addAnimation:pop forKey:@"pop"];
+        
+    }
+    
 }
 
 /*

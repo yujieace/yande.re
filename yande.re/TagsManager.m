@@ -53,7 +53,7 @@
 -(NSArray *)QuerynameLike:(NSString *)name
 {
     [self checkTags];
-    NSString *sql=[NSString stringWithFormat:@"select * from tags where name like '%%%@%%' limit 0,5",name];
+    NSString *sql=[NSString stringWithFormat:@"select * from tags where name like '%@%%' limit 0,5",name];
     FMResultSet *set=[DB executeQuery:sql];
     NSMutableArray *array=[[NSMutableArray alloc] init];
     while([set next])
@@ -72,7 +72,7 @@
 {
     //更新最新100个tags
     [self checkNewest];
-    NSDictionary *param=[[NSDictionary alloc] initWithObjectsAndKeys:@"200",@"limit",@"date",@"order", nil];
+    NSDictionary *param=[[NSDictionary alloc] initWithObjectsAndKeys:@"100",@"limit",@"date",@"order", nil];
     ComunicationModule *com=[[ComunicationModule alloc] init];
     [com RequestAPI:API_GET_TAGS Parameter:param withBlock:^(NSDictionary *Result) {
         NSArray *array=(NSArray *)Result;
@@ -105,6 +105,7 @@
                 [DB executeUpdate:insertsql];
             }
             NSLog(@"最热tag更新完成");
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"UPDATEFINISHED" object:nil];
         }
     }];
 }

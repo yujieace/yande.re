@@ -8,9 +8,10 @@
 
 #import <UIKit/UIKit.h>
 
-@interface SettingView : UIViewController
-@property (weak, nonatomic) IBOutlet UISwitch *Age_protect_switch;
-@property (weak, nonatomic) IBOutlet UIButton *CleanCacheButton;
-@property (weak, nonatomic) IBOutlet UILabel *CacheLabel;
-
+@interface SettingView : UIViewController<UITableViewDataSource,UITableViewDelegate>
+@property (strong, nonatomic) IBOutlet UISwitch *Age_protect_switch;
+@property (strong, nonatomic) IBOutlet UIButton *CleanCacheButton;
+@property (strong, nonatomic) IBOutlet UILabel *CacheLabel;
+@property (weak, nonatomic) IBOutlet UITableView *SettingView;
+@property (strong,nonatomic) IBOutlet UIButton *updateTags;
 @end

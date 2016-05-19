@@ -11,7 +11,6 @@
 #import "ViewController+Share.h"
 #import <SDWebImage/UIImageView+WebCache.h>
 #import <MBProgressHUD.h>
-#import "ZoomImageView.h"
 #import "PreferenceModule.h"
 @interface PhotoViewController ()
 
@@ -164,6 +163,7 @@
         progress.labelText=[NSString stringWithFormat:@"正在加载 %.1f%@",task*100,@"%"];
     } completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
         [MBProgressHUD hideAllHUDsForView:imageview animated:YES];
+        [self updateCurrentImage];
         download.enabled=YES;
         share.enabled=YES;
     }];
@@ -191,7 +191,7 @@
     {
         currentIndex=index;
         _param=[_Source objectAtIndex:index];
-        [self updateCurrentImage];
+        
         SDWebImageManager *manager=[SDWebImageManager sharedManager];
         BOOL Exsited=[manager diskImageExistsForURL:[NSURL URLWithString:[_param valueForKey:@"sample_url"]]];
         if(!Exsited)
@@ -203,6 +203,7 @@
         {
             download.enabled=YES;
             share.enabled=YES;
+            [self updateCurrentImage];
             
         }
         [self initBarBtn];

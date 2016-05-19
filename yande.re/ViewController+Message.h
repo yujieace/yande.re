@@ -10,4 +10,5 @@
 
 @interface  UIViewController (Message)
 -(void)ShowMessage:(NSString *)msg InSeconds:(unsigned int)seconds;
+
 @end

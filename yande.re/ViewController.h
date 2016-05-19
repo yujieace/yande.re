@@ -13,6 +13,7 @@
     CommenPostdelegate *del;
     __block CGFloat percent;
 }
-
+@property (nonatomic,strong) NSString *Mode;
+@property (nonatomic,strong) NSString *keyTag;
 @end
 

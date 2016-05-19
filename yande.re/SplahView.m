@@ -31,6 +31,7 @@
         NSMutableDictionary *shared=[Singleton GetSharedData];
         [shared setObject:marry forKey:@"Source"];
     }
+
     
     [self performSegueWithIdentifier:@"toMain" sender:self];
 }

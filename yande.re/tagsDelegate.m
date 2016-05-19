@@ -43,7 +43,7 @@
     
     for (NSDictionary *temp in tagSource) {
         NSString *tagName=[temp valueForKey:@"name"];
-        NSUInteger width=tagName.length*10;
+        NSUInteger width=tagName.length*11;
         [widthArray addObject:[NSString stringWithFormat:@"%lu",width]];
     }
 }
@@ -80,6 +80,7 @@
         name=[[UILabel alloc] initWithFrame:cell.bounds];
         name.tag=2;
     }
+    name.frame=cell.bounds;
     name.textColor=[UIColor grayColor];
     name.textAlignment=NSTextAlignmentCenter;
     name.text=[dic valueForKey:@"name"];
