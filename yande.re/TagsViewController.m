@@ -31,6 +31,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     manager=[[TagsManager alloc] init];
+    [manager installTagsDataBase];
     [self initShadowView];
     
     tags=[[NSMutableArray alloc] init];
@@ -44,7 +45,10 @@
     _collection.delegate=tagsDelegate;
     _collection.dataSource=tagsDelegate;
     [_collection reloadData];
-    [manager installTagsDataBase];
+}
+
+-(void)viewDidAppear:(BOOL)animated
+{
 }
 
 /**
