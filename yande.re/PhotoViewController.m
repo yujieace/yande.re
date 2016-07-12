@@ -220,6 +220,15 @@
         currentIndex=index;
         _param=[_Source objectAtIndex:index];
         NSArray *source=[[_param valueForKey:@"tags"] componentsSeparatedByString:@" "];
+        source=[source sortedArrayUsingComparator:^NSComparisonResult(id  _Nonnull obj1, id  _Nonnull obj2) {
+            NSString *o1=obj1;
+            NSString *o2=obj2;
+            if (o1.length>o2.length) {
+                return NSOrderedAscending;
+            }
+            else
+                return NSOrderedDescending;
+        }];
         tags.source=[source copy];
         [tags.tags reloadData];
         

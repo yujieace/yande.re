@@ -41,8 +41,9 @@
 
 -(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    TagsCell *cell=[collectionView dequeueReusableCellWithReuseIdentifier:@"Cell" forIndexPath:[NSIndexPath indexPathForItem:0 inSection:0]];
+    TagsCell *cell=[collectionView dequeueReusableCellWithReuseIdentifier:@"Cell" forIndexPath:indexPath];
     cell.title.text=[_source objectAtIndex:indexPath.row];
+    NSLog(@"%f,%f",cell.frame.origin.x,cell.frame.origin.y);
     [cell setNeedsDisplay];
     return cell;
 }
@@ -58,14 +59,14 @@
 -(CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     NSString *text=[_source objectAtIndex:indexPath.row];
-    CGFloat width=[self widthForString:text fontSize:25 andHeight:30];
+    CGFloat width=[self widthForString:text fontSize:27 andHeight:30];
     CGFloat height=30;
     return CGSizeMake(width, height);
 }
 
 -(float) widthForString:(NSString *)value fontSize:(float)fontSize andHeight:(float)height
 {
-    CGSize sizeToFit = [value sizeWithFont:[UIFont systemFontOfSize:fontSize] constrainedToSize:CGSizeMake(CGFLOAT_MAX, height) lineBreakMode:NSLineBreakByWordWrapping];//此处的换行类型（lineBreakMode）可根据自己的实际情况进行设置
+    CGSize sizeToFit = [value sizeWithFont:[UIFont systemFontOfSize:fontSize] constrainedToSize:CGSizeMake(CGFLOAT_MAX, height) lineBreakMode:NSLineBreakByWordWrapping];
     return sizeToFit.width;
 }
 -(CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout minimumInteritemSpacingForSectionAtIndex:(NSInteger)section
