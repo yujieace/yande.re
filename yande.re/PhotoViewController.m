@@ -12,8 +12,13 @@
 #import <SDWebImage/UIImageView+WebCache.h>
 #import <MBProgressHUD.h>
 #import "PreferenceModule.h"
-@interface PhotoViewController ()
+#import "miniTagsController.h"
+#import <Masonry.h>
+@interface PhotoViewController ()<miniTagsDelegate>
 
+{
+    miniTagsController *tags;
+}
 @end
 
 @implementation PhotoViewController
@@ -27,9 +32,33 @@
     _collection.delegate=self;
     [_collection reloadData];
     
-    
+    self.navigationItem.backBarButtonItem=[[UIBarButtonItem alloc] initWithTitle:@"返回" style:UIBarButtonItemStylePlain target:self action:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(ChangeLayout) name:UIApplicationDidChangeStatusBarOrientationNotification object:nil];
-    }
+    
+    NSArray *source=[[_param valueForKey:@"tags"] componentsSeparatedByString:@" "];
+    tags=[[miniTagsController alloc] init];
+    tags.source=[source copy];
+    tags.delegate=self;
+    [self.view addSubview:tags];
+    [tags mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.bottom.equalTo(self.view);
+        make.width.equalTo(self.view);
+        make.centerX.equalTo(self.view);
+        make.height.equalTo(self.view).multipliedBy(0.15);
+    }];
+    self.navigationController.hidesBarsOnTap=NO;
+    self.navigationController.hidesBarsOnSwipe=NO;
+    self.navigationController.hidesBarsWhenVerticallyCompact=NO;
+}
+
+-(void)tagsSelected:(NSString *)tag
+{
+    UIViewController *dest=[self.storyboard instantiateViewControllerWithIdentifier:@"MainView"];
+    [dest setValue:@"SEARCHMODE" forKey:@"Mode"];
+    [dest setValue:tag forKey:@"keyTag"];
+    [self.navigationController pushViewController:dest animated:YES];
+    
+}
 -(void)ChangeLayout
 {
     [_collection reloadData];
@@ -43,7 +72,6 @@
 
 -(void)viewDidAppear:(BOOL)animated
 {
-    self.navigationController.hidesBarsOnTap=YES;
     [_collection scrollToItemAtIndexPath:[NSIndexPath indexPathForRow:[_index integerValue] inSection:0] atScrollPosition:UICollectionViewScrollPositionRight animated:YES];
 }
 -(void)addDownload
@@ -191,6 +219,9 @@
     {
         currentIndex=index;
         _param=[_Source objectAtIndex:index];
+        NSArray *source=[[_param valueForKey:@"tags"] componentsSeparatedByString:@" "];
+        tags.source=[source copy];
+        [tags.tags reloadData];
         
         SDWebImageManager *manager=[SDWebImageManager sharedManager];
         BOOL Exsited=[manager diskImageExistsForURL:[NSURL URLWithString:[_param valueForKey:@"sample_url"]]];
