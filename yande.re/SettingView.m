@@ -11,6 +11,7 @@
 #import <SDWebImageManager.h>
 #import "TagsManager.h"
 #import <MBProgressHUD.h>
+#import "CloudSyncManager.h"
 @implementation SettingView
 
 -(void)viewDidLoad
@@ -75,7 +76,7 @@
 #pragma Tabledelegate
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return 4;
+    return 5;
 }
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
@@ -110,6 +111,13 @@
             break;
         case 3:
         {
+            cell.textLabel.text=@"云端同步收藏夹";
+            cell.detailTextLabel.text=@"将整合上传本地数据库，耗时不定";
+            cell.accessoryType=UITableViewCellAccessoryDisclosureIndicator;
+        }
+            break;
+        case 4:
+        {
             cell.textLabel.text=@"";
             cell.detailTextLabel.text=@"";
         }
@@ -122,7 +130,17 @@
     
     return cell;
 }
-
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if(indexPath.section==3)
+    {
+        //同步云端
+        CloudSyncManager *manager=[[CloudSyncManager alloc] init];
+        NSLog(@"开始上传");
+        [manager syncWithCloud];
+        
+    }
+}
 -(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
     return 10;

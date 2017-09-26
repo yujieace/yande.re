@@ -51,7 +51,42 @@
 }
 -(void)SuccessCallback:(id)object
 {
-    [_delegate DataCallback:[object allObjects]];
+    NSMutableArray *arr=[NSMutableArray array];
+    for (NSDictionary *post in object) {
+        NSMutableDictionary *temp=[NSMutableDictionary dictionaryWithDictionary:post];
+        NSString *sample=[temp valueForKey:@"sample_url"];
+        if(![sample hasPrefix:@"http"])
+        {
+            sample=[NSString stringWithFormat:@"http:%@",sample];
+            [temp setObject:sample forKey:@"sample_url"];
+        }
+        
+        
+        NSString *preview=[temp valueForKey:@"preview_url"];
+        if(![preview hasPrefix:@"http"])
+        {
+            preview=[NSString stringWithFormat:@"http:%@",preview];
+            [temp setObject:preview forKey:@"preview_url"];
+        }
+        
+        
+        NSString *file=[temp valueForKey:@"file_url"];
+        if(![file hasPrefix:@"http"])
+        {
+            file=[NSString stringWithFormat:@"http:%@",file];
+            [temp setObject:file forKey:@"file_url"];
+        }
+        
+        NSString *jpg=[temp valueForKey:@"jpeg_url"];
+        if(![jpg hasPrefix:@"http"])
+        {
+            jpg=[NSString stringWithFormat:@"http:%@",file];
+            [temp setObject:file forKey:@"jpeg_url"];
+        }
+        
+        [arr addObject:temp];
+    }
+    [_delegate DataCallback:arr];
 }
 
 -(void)FailureCallback:(id)object

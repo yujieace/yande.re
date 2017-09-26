@@ -50,7 +50,16 @@
         image.tag=2;
     }
     image.contentMode=UIViewContentModeScaleAspectFill;
-    [image sd_setImageWithURL:[dic valueForKey:@"preview_url"] placeholderImage:[UIImage imageNamed:@"placeholder"]];
+    NSString *url=[dic valueForKey:@"preview_url"];
+    if([url hasPrefix:@"http"])
+    {
+        
+    }
+    else
+    {
+        url=[NSString stringWithFormat:@"http:%@",url];
+    }
+    [image sd_setImageWithURL:[NSURL URLWithString:url] placeholderImage:[UIImage imageNamed:@"placeholder"]];
     [cell addSubview:image];
     UILabel *label=[cell viewWithTag:3];
     if (label==nil) {

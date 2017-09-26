@@ -14,6 +14,7 @@
 #import "PreferenceModule.h"
 #import "miniTagsController.h"
 #import <Masonry.h>
+
 @interface PhotoViewController ()<miniTagsDelegate>
 
 {
@@ -49,6 +50,11 @@
     self.navigationController.hidesBarsOnTap=NO;
     self.navigationController.hidesBarsOnSwipe=NO;
     self.navigationController.hidesBarsWhenVerticallyCompact=NO;
+}
+
+-(void)tagsControllerShow
+{
+    tags.hidden=!tags.hidden;
 }
 
 -(void)tagsSelected:(NSString *)tag
@@ -100,7 +106,31 @@
 
 -(void)DownLoad
 {
-    UIImageWriteToSavedPhotosAlbum(currentImage, self, @selector(imageSavedToPhotosAlbum:didFinishSavingWithError:contextInfo:), nil);
+    MBProgressHUD *progress=[MBProgressHUD showHUDAddedTo:self.view animated:YES];
+
+    
+    progress.mode=MBProgressHUDModeAnnularDeterminate;
+    progress.labelText=@"正在下载 0.0%";
+
+    [[SDWebImageManager sharedManager] downloadImageWithURL:[NSURL URLWithString:self.param[@"jpeg_url"]] options:SDWebImageContinueInBackground progress:^(NSInteger receivedSize, NSInteger expectedSize) {
+        float task=(float)receivedSize/(float)expectedSize;
+        if(task==-0.0)
+            task=0;
+        progress.progress=task;
+        progress.labelText=[NSString stringWithFormat:@"正在下载 %.1f%@",task*100,@"%"];
+
+    } completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, BOOL finished, NSURL *imageURL) {
+       if(finished&&!error)
+       {
+           [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+            UIImageWriteToSavedPhotosAlbum(image, self, @selector(imageSavedToPhotosAlbum:didFinishSavingWithError:contextInfo:), nil);
+       }
+        else
+        {
+            [self ShowMessage:@"下载失败" InSeconds:1];
+        }
+    }];
+   
 }
 
 -(void)Share
@@ -115,10 +145,10 @@
 - (void)imageSavedToPhotosAlbum:(UIImage *)image didFinishSavingWithError:(NSError *)error contextInfo:(void *)contextInfo
 {
     if (!error) {
-        [self ShowMessage:@"保存成功" InSeconds:2];
+        [self ShowMessage:@"保存成功" InSeconds:1];
     }else
     {
-        [self ShowMessage:@"保存失败" InSeconds:2];
+        [self ShowMessage:@"保存失败" InSeconds:1];
     }
     
     
@@ -149,6 +179,11 @@
 -(NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
     return _Source.count;
+}
+
+-(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    [self tagsControllerShow];
 }
 
 -(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath

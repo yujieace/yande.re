@@ -10,7 +10,7 @@
 #define API_h
 
 #define API_PREFIX @"https://yande.re/"
-//#define API_PREFIX @"https://www.konachan.net/"
+//#define API_PREFIX @"http://www.konachan.net/"
 #define API_GET_TAGS [API_PREFIX stringByAppendingString:@"tag.json"]
 #define API_GET_POOL [API_PREFIX stringByAppendingString:@"pool.json"]
 #define API_GET_POST [API_PREFIX stringByAppendingString:@"post.json"]

@@ -25,4 +25,6 @@
 -(BOOL)isPoolBlackListed:(NSDictionary *)pool;/**>判断Pool是否已拉黑，评级系统用于判断依据之一*/
 -(NSArray *)GetFravouritePostList;/**>获取收藏POST列表*/
 -(NSArray *)GetFravouritePoolList;/**>获取收藏POOL列表*/
+-(BOOL)writePostToDB:(NSDictionary *)post;//写入收藏的post
+-(BOOL)removePost:(NSDictionary *)post;//删除post
 @end

@@ -9,6 +9,7 @@
 #import "PreferenceModule.h"
 #import <FMDB.h>
 #import "NSDate+ToString.h"
+#import <BmobSDK/Bmob.h>
 #define PreferenceDB [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES)[0]  stringByAppendingString:@"/Preference.DB"]
 @implementation PreferenceModule
 -(instancetype)init
@@ -84,6 +85,40 @@
 }
 -(BOOL)AddPostLiked:(NSDictionary *)post
 {
+    if([self isPostLiked:post])
+        return YES;
+    
+    
+    
+    BmobQuery *query=[BmobQuery queryWithClassName:@"favourite"];
+    [query whereKey:@"id" equalTo:[post[@"id"] stringValue]];
+    [query findObjectsInBackgroundWithBlock:^(NSArray *array, NSError *error) {
+       if(array.count>0)
+       {
+           for (BmobObject *temp in array) {
+               [temp setObject:@0 forKey:@"Deleted"];
+               [temp updateInBackground];
+           }
+       }
+        else
+        {
+            BmobObject *obj=[BmobObject objectWithClassName:@"favourite"];
+            NSData *jsonData=[NSJSONSerialization dataWithJSONObject:post  options:NSJSONWritingPrettyPrinted error:nil];
+            [obj setObject:[post[@"id"] stringValue] forKey:@"id"];
+            [obj setObject:@0 forKey:@"Deleted"];
+            [obj setObject:[[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding] forKey:@"PostData"];
+            [obj saveInBackgroundWithResultBlock:^(BOOL isSuccessful, NSError *error) {
+                
+            }];
+        }
+    }];
+   
+
+    return [self writePostToDB:post];
+}
+
+-(BOOL)writePostToDB:(NSDictionary *)post
+{
     NSString *ID=[NSString stringWithFormat:@"%@",[post valueForKey:@"id"]];
     if([self isPostLiked:post])
         return YES;
@@ -97,15 +132,31 @@
 -(BOOL)RemovePostLiked:(NSDictionary *)post
 {
     NSString *ID=[NSString stringWithFormat:@"%@",[post valueForKey:@"id"]];
+    
     if([self isPostLiked:post])
     {
-        NSString *sql=[NSString stringWithFormat:@"DELETE FROM FAVOURITEPOSTTB WHERE ID='%@'",ID];
-        BOOL result= [DB executeUpdate:sql];
-        [DB commit];
+        BOOL result=[self removePost:post];
+        BmobQuery *bquery = [BmobQuery queryWithClassName:@"favourite"];
+        [bquery whereKey:@"id" equalTo:ID];
+        [bquery findObjectsInBackgroundWithBlock:^(NSArray *array, NSError *error) {
+            for (BmobObject *obj in array) {
+                [obj setObject:@1 forKey:@"Deleted"];
+                [obj updateInBackground];
+            }
+        }];
         return  result;
     }
     else
         return YES;
+}
+
+-(BOOL)removePost:(NSDictionary *)post
+{
+    NSString *ID=[NSString stringWithFormat:@"%@",[post valueForKey:@"id"]];
+    NSString *sql=[NSString stringWithFormat:@"DELETE FROM FAVOURITEPOSTTB WHERE ID='%@'",ID];
+    BOOL result= [DB executeUpdate:sql];
+    [DB commit];
+    return result;
 }
 
 -(BOOL)AddPoolLiked:(NSDictionary *)pool
