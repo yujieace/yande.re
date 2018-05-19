@@ -8,4 +8,7 @@ pod 'FMDB'
 pod 'pop', '~> 1.0'
 pod 'Masonry'
 pod 'BmobSDK'
+pod 'MWPhotoBrowser', '~> 2.1.2'
+pod 'FTPopOverMenu'
+pod 'RKDropdownAlert'
 end
