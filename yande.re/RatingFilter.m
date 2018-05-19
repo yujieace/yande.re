@@ -21,13 +21,13 @@
         [user setObject:[ratesetting copy] forKey:@"rating"];
         [user synchronize];
     }
-    if([[ratesetting valueForKey:@"age"] integerValue]>=18&&![preference isPostBlackListed:param])
+    if([[ratesetting valueForKey:@"age"] integerValue]>=18)
     {
         return true;
     }
     else
     {
-        if([[param valueForKey:@"rating"] isEqualToString:@"s"]&&![preference isPostBlackListed:param])
+        if([[param valueForKey:@"rating"] isEqualToString:@"s"])
         {
             return true;
         }

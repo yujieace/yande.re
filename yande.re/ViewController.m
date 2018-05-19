@@ -13,6 +13,7 @@
 #import "Singleton.h"
 #import "RatingFilter.h"
 #import "CommenPostdelegate.h"
+#import "ADImageViewController.h"
 #define isPad (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
 #define POSTCACHE [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES)[0]  stringByAppendingString:@"/POST.plist"]
 #define SCREEN_SIZE [self.view.bounds.size]
@@ -40,19 +41,12 @@
     del=[[CommenPostdelegate alloc] init];
     
     [del SetDidSelectBlock:^(NSIndexPath *index, NSDictionary *post) {
-        NSDictionary *dic=post;
-        UIViewController *dest=[self.storyboard instantiateViewControllerWithIdentifier:@"ShowDetailView"];
-        [dest setValue:dic forKey:@"param"];
-        [dest setValue:[NSString stringWithFormat:@"%ld",index.row] forKey:@"index"];
-        UIImageView *image=[[UIImageView alloc] init];
-        image.contentMode=UIViewContentModeScaleAspectFit;
-        [image sd_setImageWithURL:[dic valueForKey:@"preview_url"] placeholderImage:[UIImage imageNamed:@"placeholder"]];
-        [dest setValue:image.image forKey:@"placeholder"];
-        [dest setValue:_Source forKey:@"Source"];
-        dest.hidesBottomBarWhenPushed=YES;
-        
-        [self.navigationController pushViewController:dest animated:YES];
 
+
+        ADImageViewController *browser =[[ADImageViewController alloc] init];
+        browser.imageList=[_Source copy];
+        [browser setCurrentPhotoIndex:index.row];
+        [self.navigationController pushViewController:browser animated:YES];
     }];
     _collectView.dataSource=del;
     _collectView.delegate=del;
@@ -65,6 +59,13 @@
     [_collectView reloadData];
     [_collectView.header beginRefreshing];
         // Do any additional setup after loading the view, typically from a nib.
+}
+
+-(void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+
+    self.navigationController.navigationBar.titleTextAttributes=@{NSForegroundColorAttributeName:[UIColor blackColor]};
 }
 -(void)loadData
 {

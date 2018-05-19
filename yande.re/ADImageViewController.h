@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
-
-@interface ADImageViewController : UIViewController
-
+#import <MWPhotoBrowser.h>
+@interface ADImageViewController : MWPhotoBrowser
+@property (nonatomic,strong) NSArray *imageList;
+-(void)setCurrentPhotoIndex:(NSUInteger)index;
 @end

@@ -7,31 +7,111 @@
 //
 
 #import "ADImageViewController.h"
+#import "PreferenceModule.h"
+#import "ViewController+Message.h"
+#import <SDWebImage/UIImageView+WebCache.h>
+#import <MBProgressHUD.h>
+#import "PreferenceModule.h"
+#import <FTPopOverMenu.h>
+#import "DownloadManager.h"
+#import "ImageSaveDelegate.h"
 
-@interface ADImageViewController ()
-
+@interface ADImageViewController ()<MWPhotoBrowserDelegate>
+{
+    BOOL isLiked;
+    PreferenceModule *Preference;
+    NSUInteger currentIndex;
+}
 @end
 
 @implementation ADImageViewController
 
+-(instancetype)init
+{
+    self = [super init];
+    return self;
+}
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+    Preference=[[PreferenceModule alloc] init];
+    [super setDelegate:self];
+    
+    [self reloadData];
+    [self setCurrentPhotoIndex:currentIndex];
+    [self initMenuBarItem];
 }
-
+-(void)setCurrentPhotoIndex:(NSUInteger)index{
+    currentIndex=index;
+    [super setCurrentPhotoIndex:index];
+}
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+-(void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    self.navigationController.navigationBar.titleTextAttributes=@{NSForegroundColorAttributeName:[UIColor whiteColor]};
 }
-*/
+-(void)initMenuBarItem{
+    UIBarButtonItem *menu=[[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"menu"] style:UIBarButtonItemStyleDone target:self action:@selector(showPopMenu:event:)];
+    self.navigationItem.rightBarButtonItems=@[menu];
+}
+
+-(void)showPopMenu:(UIBarButtonItem *)sender event:(UIEvent *)event{
+    [FTPopOverMenu showFromEvent:event withMenuArray:@[@"下载",isLiked?@"取消收藏":@"收藏"] imageArray:@[@"download",isLiked?@"like":@"unlike"] doneBlock:^(NSInteger selectedIndex) {
+        switch (selectedIndex) {
+            case 0:
+            {
+                [self DownLoad];
+            }
+                break;
+            case 1:{
+                if(isLiked){
+                    [Preference RemovePostLiked:self.imageList[self.currentIndex]];
+                    isLiked = NO;
+                }else{
+                    [Preference AddPostLiked:self.imageList[self.currentIndex]];
+                    isLiked = YES;
+                }
+                
+            }
+                
+            default:
+                break;
+        }
+    } dismissBlock:nil];
+}
+
+
+
+
+-(void)DownLoad
+{
+    NSDictionary *param = self.imageList[self.currentIndex];
+    NSURL *url =[NSURL URLWithString:param[@"jpeg_url"]];
+    DownloadTask *task = [[DownloadTask alloc] init];
+    task.delegate=[ImageSaveDelegate sharedInstance];
+    task.url=url;
+    [[DownloadManager sharedInstance] addTask:task];
+
+}
+
+
+
+- (NSUInteger)numberOfPhotosInPhotoBrowser:(MWPhotoBrowser *)photoBrowser {
+    return self.imageList.count;
+}
+
+- (id<MWPhoto>)photoBrowser:(MWPhotoBrowser *)photoBrowser photoAtIndex:(NSUInteger)index {
+    NSDictionary *temp = _imageList[index];
+    MWPhoto *photo = [MWPhoto photoWithURL:[NSURL URLWithString:temp[@"sample_url"]]];
+    return photo;
+}
+
+- (void)photoBrowser:(MWPhotoBrowser *)photoBrowser didDisplayPhotoAtIndex:(NSUInteger)index{
+    NSDictionary *temp = _imageList[index];
+    isLiked = [Preference isPostLiked:temp];
+}
 
 @end

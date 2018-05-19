@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-
-@interface ImageSaveDelegate : NSObject
-
+#import "DownloadTask.h"
+@interface ImageSaveDelegate : NSObject<DownloadTaskDelegate>
++(ImageSaveDelegate *)sharedInstance;
 @end

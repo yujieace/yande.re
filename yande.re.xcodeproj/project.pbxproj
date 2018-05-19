@@ -73,6 +73,10 @@
 		C3D6BDDE1CBC99A200F73B1F /* RatingFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = C3D6BDDD1CBC99A200F73B1F /* RatingFilter.m */; };
 		C3D6BDE51CBCAF2400F73B1F /* SettingView.m in Sources */ = {isa = PBXBuildFile; fileRef = C3D6BDE41CBCAF2400F73B1F /* SettingView.m */; };
 		C3FFA0F11CCE016B003CE2FC /* CommenPostdelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = C3FFA0F01CCE016B003CE2FC /* CommenPostdelegate.m */; };
+		FA7324F720AFB13800E696F7 /* ADImageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FA7324F620AFB13800E696F7 /* ADImageViewController.m */; };
+		FA7324FF20AFD55E00E696F7 /* DownloadTask.m in Sources */ = {isa = PBXBuildFile; fileRef = FA7324FE20AFD55E00E696F7 /* DownloadTask.m */; };
+		FA73250320AFD9F800E696F7 /* DownloadManager.m in Sources */ = {isa = PBXBuildFile; fileRef = FA73250220AFD9F800E696F7 /* DownloadManager.m */; };
+		FA73250620AFF6F600E696F7 /* ImageSaveDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = FA73250520AFF6F600E696F7 /* ImageSaveDelegate.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -228,6 +232,14 @@
 		C3D6BDE41CBCAF2400F73B1F /* SettingView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingView.m; sourceTree = "<group>"; };
 		C3FFA0EF1CCE016B003CE2FC /* CommenPostdelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommenPostdelegate.h; sourceTree = "<group>"; };
 		C3FFA0F01CCE016B003CE2FC /* CommenPostdelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommenPostdelegate.m; sourceTree = "<group>"; };
+		FA7324F520AFB13800E696F7 /* ADImageViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ADImageViewController.h; sourceTree = "<group>"; };
+		FA7324F620AFB13800E696F7 /* ADImageViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ADImageViewController.m; sourceTree = "<group>"; };
+		FA7324FD20AFD55E00E696F7 /* DownloadTask.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DownloadTask.h; sourceTree = "<group>"; };
+		FA7324FE20AFD55E00E696F7 /* DownloadTask.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DownloadTask.m; sourceTree = "<group>"; };
+		FA73250120AFD9F800E696F7 /* DownloadManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DownloadManager.h; sourceTree = "<group>"; };
+		FA73250220AFD9F800E696F7 /* DownloadManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DownloadManager.m; sourceTree = "<group>"; };
+		FA73250420AFF6F600E696F7 /* ImageSaveDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ImageSaveDelegate.h; sourceTree = "<group>"; };
+		FA73250520AFF6F600E696F7 /* ImageSaveDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ImageSaveDelegate.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -384,38 +396,41 @@
 			path = yande.reUITests;
 			sourceTree = "<group>";
 		};
-		C3774A641CD1FE240091990A /* 最新图片 */ = {
+		C3774A641CD1FE240091990A /* NewPosts */ = {
 			isa = PBXGroup;
 			children = (
 				C37350A31CBB2BC10044BC5C /* ViewController.h */,
 				C37350A41CBB2BC10044BC5C /* ViewController.m */,
 			);
-			name = "最新图片";
+			name = NewPosts;
 			sourceTree = "<group>";
 		};
-		C3774A651CD1FE390091990A /* 查看图片详情 */ = {
+		C3774A651CD1FE390091990A /* ImageViewer */ = {
 			isa = PBXGroup;
 			children = (
+				FA7324F820AFB2FA00E696F7 /* cell */,
 				C3A3286B1CE3053D0017FA06 /* PhotoViewController.h */,
 				C3A3286C1CE3053D0017FA06 /* PhotoViewController.m */,
 				C3A567C11D3472A200BC7B3D /* TagsCell.h */,
 				C3A567C21D3472A200BC7B3D /* TagsCell.m */,
 				C3A567C41D34745200BC7B3D /* miniTagsController.h */,
 				C3A567C51D34745200BC7B3D /* miniTagsController.m */,
+				FA7324F520AFB13800E696F7 /* ADImageViewController.h */,
+				FA7324F620AFB13800E696F7 /* ADImageViewController.m */,
 			);
-			name = "查看图片详情";
+			name = ImageViewer;
 			sourceTree = "<group>";
 		};
-		C3774A661CD1FE500091990A /* 启动页 */ = {
+		C3774A661CD1FE500091990A /* Launcher */ = {
 			isa = PBXGroup;
 			children = (
 				C3D12D101CBBA82F004318D7 /* SplahView.h */,
 				C3D12D111CBBA82F004318D7 /* SplahView.m */,
 			);
-			name = "启动页";
+			name = Launcher;
 			sourceTree = "<group>";
 		};
-		C3774A671CD1FE920091990A /* 设置 */ = {
+		C3774A671CD1FE920091990A /* Setting */ = {
 			isa = PBXGroup;
 			children = (
 				C3D6BDE31CBCAF2400F73B1F /* SettingView.h */,
@@ -423,10 +438,10 @@
 				7A2459351EA7528200196806 /* CloudSyncManager.h */,
 				7A2459361EA7528200196806 /* CloudSyncManager.m */,
 			);
-			name = "设置";
+			name = Setting;
 			sourceTree = "<group>";
 		};
-		C3774A681CD1FEB10091990A /* 最新图集 */ = {
+		C3774A681CD1FEB10091990A /* NewPools */ = {
 			isa = PBXGroup;
 			children = (
 				C3A602561CBCC84E000F7694 /* PoolsViewController.h */,
@@ -434,10 +449,10 @@
 				C3984A751CBE442B001E1EBB /* PostsViewController.h */,
 				C3984A761CBE442B001E1EBB /* PostsViewController.m */,
 			);
-			name = "最新图集";
+			name = NewPools;
 			sourceTree = "<group>";
 		};
-		C3774A691CD1FEC10091990A /* 收藏夹 */ = {
+		C3774A691CD1FEC10091990A /* Favourite */ = {
 			isa = PBXGroup;
 			children = (
 				C32561C31CD0A7C0009D3EC5 /* FavouriteViewController.h */,
@@ -447,16 +462,16 @@
 				C32561CC1CD0BB4D009D3EC5 /* FavouritePools.h */,
 				C32561CD1CD0BB4D009D3EC5 /* FavouritePools.m */,
 			);
-			name = "收藏夹";
+			name = Favourite;
 			sourceTree = "<group>";
 		};
-		C3774A6A1CD1FEDC0091990A /* 标签页控制器 */ = {
+		C3774A6A1CD1FEDC0091990A /* TabPageController */ = {
 			isa = PBXGroup;
 			children = (
 				C3774A5E1CD1FD0E0091990A /* AdvancedTabBarController.h */,
 				C3774A5F1CD1FD0E0091990A /* AdvancedTabBarController.m */,
 			);
-			name = "标签页控制器";
+			name = TabPageController;
 			sourceTree = "<group>";
 		};
 		C3774A6B1CD200330091990A /* Views */ = {
@@ -493,13 +508,13 @@
 			isa = PBXGroup;
 			children = (
 				C3774A6C1CD20BF40091990A /* Tags */,
-				C3774A6A1CD1FEDC0091990A /* 标签页控制器 */,
-				C3774A691CD1FEC10091990A /* 收藏夹 */,
-				C3774A681CD1FEB10091990A /* 最新图集 */,
-				C3774A671CD1FE920091990A /* 设置 */,
-				C3774A661CD1FE500091990A /* 启动页 */,
-				C3774A651CD1FE390091990A /* 查看图片详情 */,
-				C3774A641CD1FE240091990A /* 最新图片 */,
+				C3774A6A1CD1FEDC0091990A /* TabPageController */,
+				C3774A691CD1FEC10091990A /* Favourite */,
+				C3774A681CD1FEB10091990A /* NewPools */,
+				C3774A671CD1FE920091990A /* Setting */,
+				C3774A661CD1FE500091990A /* Launcher */,
+				C3774A651CD1FE390091990A /* ImageViewer */,
+				C3774A641CD1FE240091990A /* NewPosts */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -507,6 +522,7 @@
 		C3A602551CBCC808000F7694 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				FA7324FC20AFD54300E696F7 /* Download */,
 				C3A3285E1CDC46190017FA06 /* datasource */,
 				C3D12D041CBB8DB7004318D7 /* category */,
 				C3D6BDDF1CBCA88F00F73B1F /* Delegate */,
@@ -653,6 +669,34 @@
 			name = Delegate;
 			sourceTree = "<group>";
 		};
+		FA7324F820AFB2FA00E696F7 /* cell */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = cell;
+			sourceTree = "<group>";
+		};
+		FA7324FC20AFD54300E696F7 /* Download */ = {
+			isa = PBXGroup;
+			children = (
+				FA73250020AFD9D800E696F7 /* model */,
+				FA73250120AFD9F800E696F7 /* DownloadManager.h */,
+				FA73250220AFD9F800E696F7 /* DownloadManager.m */,
+				FA73250420AFF6F600E696F7 /* ImageSaveDelegate.h */,
+				FA73250520AFF6F600E696F7 /* ImageSaveDelegate.m */,
+			);
+			name = Download;
+			sourceTree = "<group>";
+		};
+		FA73250020AFD9D800E696F7 /* model */ = {
+			isa = PBXGroup;
+			children = (
+				FA7324FD20AFD55E00E696F7 /* DownloadTask.h */,
+				FA7324FE20AFD55E00E696F7 /* DownloadTask.m */,
+			);
+			name = model;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -664,8 +708,7 @@
 				C37350961CBB2BC10044BC5C /* Sources */,
 				C37350971CBB2BC10044BC5C /* Frameworks */,
 				C37350981CBB2BC10044BC5C /* Resources */,
-				0066FE890D0C67138BCB2B2E /* [CP] Embed Pods Frameworks */,
-				DCA1E7CD21C193A38A58DD2D /* [CP] Copy Pods Resources */,
+				789BBF9AA864B72E8E1E637C /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -723,7 +766,7 @@
 				TargetAttributes = {
 					C37350991CBB2BC10044BC5C = {
 						CreatedOnToolsVersion = 7.2;
-						DevelopmentTeam = Q5FZ24XVNB;
+						DevelopmentTeam = B28MFRDSCY;
 					};
 					C37350B21CBB2BC10044BC5C = {
 						CreatedOnToolsVersion = 7.2;
@@ -785,45 +828,36 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		0066FE890D0C67138BCB2B2E /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-yande.re/Pods-yande.re-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		6DD9F5A033653C588C76F233 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
 			);
 			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-yande.re-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		DCA1E7CD21C193A38A58DD2D /* [CP] Copy Pods Resources */ = {
+		789BBF9AA864B72E8E1E637C /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-yande.re/Pods-yande.re-resources.sh",
+				"${PODS_CONFIGURATION_BUILD_DIR}/MWPhotoBrowser/MWPhotoBrowser.bundle",
 			);
 			name = "[CP] Copy Pods Resources";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/MWPhotoBrowser.bundle",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -841,6 +875,7 @@
 				C3D6BDDE1CBC99A200F73B1F /* RatingFilter.m in Sources */,
 				C32561BF1CD0A66F009D3EC5 /* DLFixedTabbarView.m in Sources */,
 				C3774A601CD1FD0E0091990A /* AdvancedTabBarController.m in Sources */,
+				FA7324FF20AFD55E00E696F7 /* DownloadTask.m in Sources */,
 				C3D12CFD1CBB8B74004318D7 /* MJRefreshNormalHeader.m in Sources */,
 				C3D12CFE1CBB8B74004318D7 /* MJRefreshStateHeader.m in Sources */,
 				C3A328671CE179B70017FA06 /* ViewController+Message.m in Sources */,
@@ -859,6 +894,7 @@
 				C3D12CF31CBB8B74004318D7 /* MJRefreshComponent.m in Sources */,
 				C3D12CF61CBB8B74004318D7 /* MJRefreshAutoGifFooter.m in Sources */,
 				C3984A6E1CBE2485001E1EBB /* NSnull+Json.m in Sources */,
+				FA73250320AFD9F800E696F7 /* DownloadManager.m in Sources */,
 				C3D12CF21CBB8B74004318D7 /* MJRefreshBackFooter.m in Sources */,
 				C3A602581CBCC84E000F7694 /* PoolsViewController.m in Sources */,
 				C37350A51CBB2BC10044BC5C /* ViewController.m in Sources */,
@@ -866,6 +902,7 @@
 				C37350A21CBB2BC10044BC5C /* AppDelegate.m in Sources */,
 				C3D12CF71CBB8B74004318D7 /* MJRefreshAutoNormalFooter.m in Sources */,
 				C3D12D0D1CBB9F7A004318D7 /* Singleton.m in Sources */,
+				FA7324F720AFB13800E696F7 /* ADImageViewController.m in Sources */,
 				C3D12D021CBB8B74004318D7 /* UIScrollView+MJRefresh.m in Sources */,
 				C32561C51CD0A7C0009D3EC5 /* FavouriteViewController.m in Sources */,
 				C38D8F941CEC48DF00F833E1 /* TagsDelegate.m in Sources */,
@@ -887,6 +924,7 @@
 				C3D12CFB1CBB8B74004318D7 /* MJRefreshBackStateFooter.m in Sources */,
 				C3D12D071CBB8DE3004318D7 /* UIView+Shadow.m in Sources */,
 				C3984A801CC0BD93001E1EBB /* NSDate+ToString.m in Sources */,
+				FA73250620AFF6F600E696F7 /* ImageSaveDelegate.m in Sources */,
 				C33DFB221CEC6FE000A65A5D /* TableDelegate.m in Sources */,
 				C373509F1CBB2BC10044BC5C /* main.m in Sources */,
 				C3D12CF11CBB8B74004318D7 /* MJRefreshAutoFooter.m in Sources */,
@@ -1036,11 +1074,11 @@
 			baseConfigurationReference = 0189EAA91BB6F28FC75F4FAE /* Pods-yande.re.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = Q5FZ24XVNB;
+				DEVELOPMENT_TEAM = B28MFRDSCY;
 				INFOPLIST_FILE = yande.re/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "hnzc.yande-re";
+				PRODUCT_BUNDLE_IDENTIFIER = yande.re;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -1050,11 +1088,11 @@
 			baseConfigurationReference = 66D651F1BBD56E6CBE91AA4E /* Pods-yande.re.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = Q5FZ24XVNB;
+				DEVELOPMENT_TEAM = B28MFRDSCY;
 				INFOPLIST_FILE = yande.re/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "hnzc.yande-re";
+				PRODUCT_BUNDLE_IDENTIFIER = yande.re;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;

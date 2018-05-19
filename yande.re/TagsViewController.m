@@ -8,8 +8,8 @@
 
 #import "TagsViewController.h"
 #import "TagsManager.h"
-#import "TagsDelegate.h"
-#import <pop/POPSpringAnimation.h>
+#import "tagsDelegate.h"
+
 #import "TableDelegate.h"
 #import <MBProgressHUD.h>
 @interface TagsViewController ()<UISearchBarDelegate>
@@ -30,6 +30,9 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    UITextField*searchField = [_SearchBar valueForKey:@"_searchField"];
+    searchField.textColor = [UIColor whiteColor];
+    
     manager=[[TagsManager alloc] init];
     [manager installTagsDataBase];
     [self initShadowView];
@@ -56,7 +59,7 @@
  */
 -(void)initShadowView
 {
-    shadowView=[[UIView alloc] initWithFrame:CGRectMake(0, _SearchBar.frame.origin.y+_SearchBar.bounds.size.height, self.view.bounds.size.width, self.view.bounds.size.height-(_SearchBar.frame.origin.y+_SearchBar.bounds.size.height))];
+    shadowView=[[UIView alloc] initWithFrame:self.view.bounds];
     shadowView.backgroundColor=[UIColor clearColor];
     UIVisualEffectView *effect=[[UIVisualEffectView alloc] initWithFrame:shadowView.bounds];
     effect.effect=[UIBlurEffect effectWithStyle:UIBlurEffectStyleDark];
@@ -99,7 +102,7 @@
 -(void)ShowShadowView
 {
     shadowView.alpha=0;
-    [self.view addSubview:shadowView];
+    [self.view insertSubview:shadowView belowSubview:_SearchBar];
     [UIView animateWithDuration:0.3 animations:^{
        shadowView.alpha=1;
     } completion:^(BOOL finished) {
@@ -169,7 +172,7 @@
     
     if(searchResult==nil)
     {
-        searchResult=[[UITableView alloc] initWithFrame:CGRectMake(0, 0, shadowView.bounds.size.width, height)];
+         searchResult=[[UITableView alloc] initWithFrame:CGRectMake(0, self.SearchBar.frame.origin.y+_SearchBar.bounds.size.height, shadowView.bounds.size.width, height)];
         tabledel=[[TableDelegate alloc] init];
         [tabledel setValue:tagsSource forKey:@"Source"];
         __weak __typeof(&*self)weakSelf = self;
@@ -189,9 +192,10 @@
     else
     {
         [tabledel setValue:tagsSource forKey:@"Source"];
-        POPSpringAnimation *pop=[POPSpringAnimation animationWithPropertyNamed:kPOPViewFrame];
-        pop.toValue=[NSValue valueWithCGRect:CGRectMake(0, 0, shadowView.bounds.size.width, height)];
-        [searchResult pop_addAnimation:pop forKey:@"pop"];
+        [UIView animateWithDuration:0.1 animations:^{
+            searchResult.frame=CGRectMake(0, self.SearchBar.frame.origin.y+self.SearchBar.bounds.size.height, shadowView.bounds.size.width, height);
+        }];
+       
         
     }
     

@@ -9,6 +9,7 @@
 #import "FavouritePost.h"
 #import "MJRefresh.h"
 #import "RatingFilter.h"
+#import "ADImageViewController.h"
 @implementation FavouritePost
 -(void)viewDidLoad
 {
@@ -38,18 +39,10 @@
 -(void)DidSelect
 {
     [del SetDidSelectBlock:^(NSIndexPath *index, NSDictionary *post) {
-        NSDictionary *dic=post;
-        UIViewController *dest=[self.storyboard instantiateViewControllerWithIdentifier:@"ShowDetailView"];
-        [dest setValue:dic forKey:@"param"];
-        [dest setValue:[NSString stringWithFormat:@"%ld",index.row] forKey:@"index"];
-        UIImageView *image=[[UIImageView alloc] init];
-        image.contentMode=UIViewContentModeScaleAspectFit;
-        [image sd_setImageWithURL:[dic valueForKey:@"preview_url"] placeholderImage:[UIImage imageNamed:@"placeholder"]];
-        [dest setValue:image.image forKey:@"placeholder"];
-        [dest setValue:Source forKey:@"Source"];
-        dest.hidesBottomBarWhenPushed=YES;
-        
-        [self.navigationController pushViewController:dest animated:YES];
+        ADImageViewController *browser =[[ADImageViewController alloc] init];
+        browser.imageList=[Source copy];
+        [browser setCurrentPhotoIndex:index.row];
+        [self.navigationController pushViewController:browser animated:YES];
     }];
 }
 @end

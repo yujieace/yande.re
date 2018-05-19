@@ -7,22 +7,14 @@
 //
 
 #import "ViewController+Message.h"
-#import <MBProgressHUD.h>
+#import <RKDropdownAlert.h>
 
 
 @implementation UIViewController (Message)
 
 -(void)ShowMessage:(NSString *)msg InSeconds:(unsigned int)seconds
 {
-    MBProgressHUD *hud=[[MBProgressHUD alloc ]initWithView:self.view];
-    hud.mode=MBProgressHUDModeText;
-    [self.view addSubview:hud];
-    hud.labelText=msg;
-    [hud showAnimated:YES whileExecutingBlock:^{
-        sleep(seconds);
-    } completionBlock:^{
-        [hud removeFromSuperview];
-    }];
+    [RKDropdownAlert title:msg time:seconds];
 }
 
 
