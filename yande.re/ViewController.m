@@ -14,35 +14,55 @@
 #import "RatingFilter.h"
 #import "CommenPostdelegate.h"
 #import "ADImageViewController.h"
+#import <Masonry.h>
+#import <objc/runtime.h>
+
 #define isPad (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
 #define POSTCACHE [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES)[0]  stringByAppendingString:@"/POST.plist"]
 #define SCREEN_SIZE [self.view.bounds.size]
 @interface ViewController ()<DataSouceDelegate>
 @property (nonatomic,strong) NSMutableArray *Source;
-@property (weak, nonatomic) IBOutlet UICollectionView *collectView;
+@property (strong, nonatomic) IBOutlet UICollectionView *collectView;
+
 @property NSInteger page;
 @end
 
 @implementation ViewController
+-(instancetype)init{
+    self=[super init];
+    
+    return self;
+}
+
+-(UICollectionView *)collectView
+{
+    if(_collectView == nil){
+        UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc] init];
+        _collectView = [[UICollectionView alloc] initWithFrame:self.view.bounds collectionViewLayout:layout];
+        [self.view addSubview:_collectView];
+        [_collectView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.edges.equalTo(self.view);
+        }];
+    }
+    return _collectView;
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     _page=1;
-    
+
     if([_Mode isEqualToString:@"SEARCHMODE"])
     {
         self.title=[NSString stringWithFormat:@"%@的搜索结果",_keyTag];
     }
     _Source=[[NSMutableArray alloc] init];
-    _collectView.header.backgroundColor=[UIColor clearColor];
+    self.collectView.header.backgroundColor=[UIColor clearColor];
     _collectView.header=[MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(loadData)];
     [_collectView.header setAutomaticallyChangeAlpha:YES];
     _collectView.footer=[MJRefreshAutoNormalFooter footerWithRefreshingTarget:self refreshingAction:@selector(LoadMore)];
     del=[[CommenPostdelegate alloc] init];
     
     [del SetDidSelectBlock:^(NSIndexPath *index, NSDictionary *post) {
-
-
         ADImageViewController *browser =[[ADImageViewController alloc] init];
         browser.imageList=[_Source copy];
         [browser setCurrentPhotoIndex:index.row];
@@ -58,14 +78,13 @@
     [del setSource:_Source];
     [_collectView reloadData];
     [_collectView.header beginRefreshing];
-        // Do any additional setup after loading the view, typically from a nib.
 }
 
 -(void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
-
     self.navigationController.navigationBar.titleTextAttributes=@{NSForegroundColorAttributeName:[UIColor blackColor]};
+
 }
 -(void)loadData
 {

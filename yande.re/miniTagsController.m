@@ -9,6 +9,8 @@
 #import "miniTagsController.h"
 #import "TagsCell.h"
 #import <Masonry.h>
+#import <UICollectionViewLeftAlignedLayout.h>
+#import <YYText.h>
 @interface miniTagsController ()
 
 @end
@@ -18,7 +20,8 @@
 -(instancetype)init
 {
     self=[super init];
-    _tags=[[UICollectionView alloc] initWithFrame:self.bounds collectionViewLayout:[[UICollectionViewFlowLayout alloc] init]];
+    UICollectionViewLeftAlignedLayout *layout= [[UICollectionViewLeftAlignedLayout alloc] init];
+    _tags=[[UICollectionView alloc] initWithFrame:self.bounds collectionViewLayout:layout];
     _source=[[NSArray alloc] init];
     [self addSubview:_tags];
     self.backgroundColor=[UIColor colorWithWhite:0 alpha:0.6];
@@ -42,7 +45,12 @@
 -(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     TagsCell *cell=[collectionView dequeueReusableCellWithReuseIdentifier:@"Cell" forIndexPath:indexPath];
-    cell.title.text=[_source objectAtIndex:indexPath.row];
+    NSString *text=[_source objectAtIndex:indexPath.row];
+    NSMutableAttributedString *str = [[NSMutableAttributedString alloc] initWithString:text];
+    NSRange strRange = {0,[str length]};
+    //[str addAttribute:NSUnderlineStyleAttributeName value:[NSNumber numberWithInteger:NSUnderlineStyleSingle] range:strRange];
+    [str addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:14] range:strRange];
+    [cell.title setAttributedText:str];
     NSLog(@"%f,%f",cell.frame.origin.x,cell.frame.origin.y);
     [cell setNeedsDisplay];
     return cell;
@@ -59,16 +67,17 @@
 -(CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     NSString *text=[_source objectAtIndex:indexPath.row];
-    CGFloat width=[self widthForString:text fontSize:27 andHeight:30];
+    NSMutableAttributedString *str = [[NSMutableAttributedString alloc] initWithString:text];
+    NSRange strRange = {0,[str length]};
+    //[str addAttribute:NSUnderlineStyleAttributeName value:[NSNumber numberWithInteger:NSUnderlineStyleSingle] range:strRange];
+    [str addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:14] range:strRange];
+    YYTextLayout *layout =[YYTextLayout layoutWithContainerSize:CGSizeMake(CGFLOAT_MAX, 20) text:str];
+    CGFloat width=layout.textBoundingRect.size.width+30;
     CGFloat height=30;
     return CGSizeMake(width, height);
 }
 
--(float) widthForString:(NSString *)value fontSize:(float)fontSize andHeight:(float)height
-{
-    CGSize sizeToFit = [value sizeWithFont:[UIFont systemFontOfSize:fontSize] constrainedToSize:CGSizeMake(CGFLOAT_MAX, height) lineBreakMode:NSLineBreakByWordWrapping];
-    return sizeToFit.width;
-}
+
 -(CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout minimumInteritemSpacingForSectionAtIndex:(NSInteger)section
 {
     return 5;

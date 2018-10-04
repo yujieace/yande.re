@@ -7,6 +7,7 @@
 //
 
 #import "CommenPostdelegate.h"
+#import "CollectionImageCell.h"
 @implementation CommenPostdelegate
 -(instancetype)init
 {
@@ -40,16 +41,17 @@
 
 -(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    UICollectionViewCell *cell=[collectionView dequeueReusableCellWithReuseIdentifier:@"Cell" forIndexPath:indexPath];
+    CollectionImageCell *cell=[collectionView dequeueReusableCellWithReuseIdentifier:@"Cell" forIndexPath:indexPath];
+    
 
     NSDictionary *dic=[Source objectAtIndex:indexPath.row];
-    UIImageView *image=[cell viewWithTag:2];
-    if(image==nil)
-    {
-        image=[[UIImageView alloc] initWithFrame:cell.bounds];
-        image.tag=2;
-    }
-    image.contentMode=UIViewContentModeScaleAspectFill;
+//    UIImageView *image=[cell viewWithTag:2];
+//    if(image==nil)
+//    {
+//        image=[[UIImageView alloc] initWithFrame:cell.bounds];
+//        image.tag=2;
+//    }
+//    image.contentMode=UIViewContentModeScaleAspectFill;
     NSString *url=[dic valueForKey:@"preview_url"];
     if([url hasPrefix:@"http"])
     {
@@ -59,20 +61,22 @@
     {
         url=[NSString stringWithFormat:@"http:%@",url];
     }
-    [image sd_setImageWithURL:[NSURL URLWithString:url] placeholderImage:[UIImage imageNamed:@"placeholder"]];
-    [cell addSubview:image];
-    UILabel *label=[cell viewWithTag:3];
-    if (label==nil) {
-        label=[[UILabel alloc] initWithFrame:CGRectMake(0, image.bounds.size.height-30, image.bounds.size.width, 30)];
-        label.tag=3;
-    }
-    label.backgroundColor=[UIColor colorWithRed:0 green:0 blue:0 alpha:0.6];
-    label.text=[NSString stringWithFormat:@"评级:%@",[RatingFilter RatingLevel:dic]];
-    label.textAlignment=NSTextAlignmentCenter;
-    label.textColor=[UIColor whiteColor];
-    cell.backgroundColor=[UIColor whiteColor];
-    [cell addSubview:label];
-    
+    [cell.imageView sd_setImageWithURL:[NSURL URLWithString:url] placeholderImage:[UIImage imageNamed:@"placeholder"]];
+    [cell.textLabel setText:[NSString stringWithFormat:@"评级:%@",[RatingFilter RatingLevel:dic]]];
+//    [image sd_setImageWithURL:[NSURL URLWithString:url] placeholderImage:[UIImage imageNamed:@"placeholder"]];
+//    [cell addSubview:image];
+//    UILabel *label=[cell viewWithTag:3];
+//    if (label==nil) {
+//        label=[[UILabel alloc] initWithFrame:CGRectMake(0, image.bounds.size.height-30, image.bounds.size.width, 30)];
+//        label.tag=3;
+//    }
+//    label.backgroundColor=[UIColor colorWithRed:0 green:0 blue:0 alpha:0.6];
+//    label.text=[NSString stringWithFormat:@"评级:%@",[RatingFilter RatingLevel:dic]];
+//    label.textAlignment=NSTextAlignmentCenter;
+//    label.textColor=[UIColor whiteColor];
+//    cell.backgroundColor=[UIColor whiteColor];
+//    [cell addSubview:label];
+//
     
     
     if(CellModifyBlock!=nil)

@@ -77,6 +77,8 @@
 		FA7324FF20AFD55E00E696F7 /* DownloadTask.m in Sources */ = {isa = PBXBuildFile; fileRef = FA7324FE20AFD55E00E696F7 /* DownloadTask.m */; };
 		FA73250320AFD9F800E696F7 /* DownloadManager.m in Sources */ = {isa = PBXBuildFile; fileRef = FA73250220AFD9F800E696F7 /* DownloadManager.m */; };
 		FA73250620AFF6F600E696F7 /* ImageSaveDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = FA73250520AFF6F600E696F7 /* ImageSaveDelegate.m */; };
+		FAAECEA22165AABF000DF43F /* CollectionImageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = FAAECEA12165AABF000DF43F /* CollectionImageCell.m */; };
+		FAAECEA92165B1F2000DF43F /* GradientView.m in Sources */ = {isa = PBXBuildFile; fileRef = FAAECEA82165B1F2000DF43F /* GradientView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -240,6 +242,10 @@
 		FA73250220AFD9F800E696F7 /* DownloadManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DownloadManager.m; sourceTree = "<group>"; };
 		FA73250420AFF6F600E696F7 /* ImageSaveDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ImageSaveDelegate.h; sourceTree = "<group>"; };
 		FA73250520AFF6F600E696F7 /* ImageSaveDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ImageSaveDelegate.m; sourceTree = "<group>"; };
+		FAAECEA02165AABF000DF43F /* CollectionImageCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CollectionImageCell.h; sourceTree = "<group>"; };
+		FAAECEA12165AABF000DF43F /* CollectionImageCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CollectionImageCell.m; sourceTree = "<group>"; };
+		FAAECEA72165B1F2000DF43F /* GradientView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GradientView.h; sourceTree = "<group>"; };
+		FAAECEA82165B1F2000DF43F /* GradientView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GradientView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -477,6 +483,8 @@
 		C3774A6B1CD200330091990A /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				FAAECEA62165B1D7000DF43F /* view */,
+				FAAECE9F2165AA89000DF43F /* cell */,
 				C37350A61CBB2BC10044BC5C /* Main.storyboard */,
 				C37350AB1CBB2BC10044BC5C /* LaunchScreen.storyboard */,
 				C37350A91CBB2BC10044BC5C /* Assets.xcassets */,
@@ -697,6 +705,24 @@
 			name = model;
 			sourceTree = "<group>";
 		};
+		FAAECE9F2165AA89000DF43F /* cell */ = {
+			isa = PBXGroup;
+			children = (
+				FAAECEA02165AABF000DF43F /* CollectionImageCell.h */,
+				FAAECEA12165AABF000DF43F /* CollectionImageCell.m */,
+			);
+			name = cell;
+			sourceTree = "<group>";
+		};
+		FAAECEA62165B1D7000DF43F /* view */ = {
+			isa = PBXGroup;
+			children = (
+				FAAECEA72165B1F2000DF43F /* GradientView.h */,
+				FAAECEA82165B1F2000DF43F /* GradientView.m */,
+			);
+			name = view;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -874,6 +900,7 @@
 				C3FFA0F11CCE016B003CE2FC /* CommenPostdelegate.m in Sources */,
 				C3D6BDDE1CBC99A200F73B1F /* RatingFilter.m in Sources */,
 				C32561BF1CD0A66F009D3EC5 /* DLFixedTabbarView.m in Sources */,
+				FAAECEA22165AABF000DF43F /* CollectionImageCell.m in Sources */,
 				C3774A601CD1FD0E0091990A /* AdvancedTabBarController.m in Sources */,
 				FA7324FF20AFD55E00E696F7 /* DownloadTask.m in Sources */,
 				C3D12CFD1CBB8B74004318D7 /* MJRefreshNormalHeader.m in Sources */,
@@ -920,6 +947,7 @@
 				C3D12CF41CBB8B74004318D7 /* MJRefreshFooter.m in Sources */,
 				C32561C81CD0A9C7009D3EC5 /* FavouritePost.m in Sources */,
 				C32561BD1CD0A66F009D3EC5 /* DLCustomSlideView.m in Sources */,
+				FAAECEA92165B1F2000DF43F /* GradientView.m in Sources */,
 				C32561C11CD0A66F009D3EC5 /* DLTabedSlideView.m in Sources */,
 				C3D12CFB1CBB8B74004318D7 /* MJRefreshBackStateFooter.m in Sources */,
 				C3D12D071CBB8DE3004318D7 /* UIView+Shadow.m in Sources */,

@@ -10,4 +10,6 @@ pod 'BmobSDK'
 pod 'MWPhotoBrowser', '~> 2.1.2'
 pod 'FTPopOverMenu'
 pod 'RKDropdownAlert'
+pod 'UICollectionViewLeftAlignedLayout'
+pod 'YYText', '~> 1.0.7'
 end
